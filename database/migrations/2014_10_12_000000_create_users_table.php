@@ -12,13 +12,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+        Schema::create('CUENTAS', function (Blueprint $table) {
+            $table->increments('CUE_ID');
+            $table->string('CUE_EMAIL')->unique();
+            $table->string('CUE_PASSWORD');
+            $table->string('CUE_RUT',12);
+            $table->string('CUE_NOMBRES',60);
+            $table->string('CUE_APELL_PATERNO',60);
+            $table->string('CUE_APELL_MATERNO',60);
+            $table->string('CUE_TIPO',15);
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 
@@ -29,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('CUENTAS');
     }
 }
