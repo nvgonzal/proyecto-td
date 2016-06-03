@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Cuenta;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -23,6 +23,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    public $registerView = 'auth.registrar';
+
     /**
      * Where to redirect users after login / registration.
      *
@@ -33,7 +35,6 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -49,9 +50,13 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'nombres'           => 'required|max:60',
+            'apellido_paterno'  => 'required|max:60',
+            'apellido_materno'  => 'required|max:60',
+            'rut'               => 'required|cl_rut|max:12',
+            'tipo'              => 'required|in:cliente,transportista,ambos',
+            'email'             => 'required|email|max:255|unique:CUENTAS,CUE_EMAIL',
+            'password'          => 'required|min:6|confirmed',
         ]);
     }
 
@@ -59,14 +64,19 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return Cuenta
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        return Cuenta::create([
+            'CUE_NOMBRES'       => $data['nombres'],
+            'CUE_APELL_PATERNO' => $data['apellido_paterno'],
+            'CUE_APELL_MATERNO' => $data['apellido_materno'],
+            'CUE_RUT'           => $data['rut'],
+            'CUE_EMAIL'         => $data['email'],
+            'CUE_TIPO'          => $data['tipo'],
+            'CUE_PASSWORD'      => bcrypt($data['password']),
         ]);
     }
+
 }
