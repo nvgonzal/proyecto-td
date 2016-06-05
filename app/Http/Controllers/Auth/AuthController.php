@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Hash;
+use Flash;
+use App\Cliente;
 use App\Cuenta;
+use App\Trasportista;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -23,6 +29,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $username = 'CUE_EMAIL';
     public $registerView = 'auth.registrar';
 
     /**
@@ -68,15 +75,56 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return Cuenta::create([
-            'CUE_NOMBRES'       => $data['nombres'],
-            'CUE_APELL_PATERNO' => $data['apellido_paterno'],
-            'CUE_APELL_MATERNO' => $data['apellido_materno'],
-            'CUE_RUT'           => $data['rut'],
-            'CUE_EMAIL'         => $data['email'],
-            'CUE_TIPO'          => $data['tipo'],
-            'CUE_PASSWORD'      => bcrypt($data['password']),
+        $cuenta = new Cuenta();
+        $cuenta->setAttribute('CUE_EMAIL', $data['email']);
+        $cuenta->setAttribute('CUE_NOMBRES', $data['nombres']);
+        $cuenta->setAttribute('CUE_APELL_PATERNO', $data['apellido_paterno']);
+        $cuenta->setAttribute('CUE_APELL_MATERNO', $data['apellido_materno']);
+        $cuenta->setAttribute('CUE_RUT', $data['rut']);
+        $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
+        $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
+        $cuenta->save();
+        $tCuenta = $cuenta->getAttribute('CUE_TIPO');
+        switch ($tCuenta) {
+            case 'cliente':
+                $cliente = new Cliente();
+                $cliente->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
+                $cliente->setAttribute('CLI_VALORACION', '0');
+                $cliente->save();
+                break;
+            case 'trasportista':
+                $trasnportista = new Trasportista();
+                $trasnportista->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
+                $trasnportista->setAttribute('TRA_VALORACION', '0');
+                $trasnportista->save();
+                break;
+            case 'ambos':
+                $cliente = new Cliente();
+                $cliente->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
+                $cliente->setAttribute('CLI_VALORACION', '0');
+                $cliente->save();
+                $trasnportista = new Trasportista();
+                $trasnportista->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
+                $trasnportista->setAttribute('TRA_VALORACION', '0');
+                $trasnportista->save();
+                break;
+        }
+        return $cuenta;
+    }
+
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
         ]);
+        if (Auth::attempt(['CUE_EMAIL' => $request['email'], 'password' => $request['password']], $request['remember'])) {
+            return redirect()->intended('/');
+        } else {
+            Flash::error('Email o contraseña no coinciden');
+            return redirect()->to('/login');
+        }
+
     }
 
 }
