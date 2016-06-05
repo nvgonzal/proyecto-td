@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "freshwork/chilean-bundle": "^2.0",
         "laravelcollective/html": "5.2.*",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "laracasts/flash": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

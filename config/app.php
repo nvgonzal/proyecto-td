@@ -158,6 +158,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 
@@ -208,7 +209,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Rut'   => Freshwork\ChileanBundle\Laravel\Facades\Rut::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
+        'Flash' => Laracasts\Flash\Flash::class,
     ],
 
 ];
