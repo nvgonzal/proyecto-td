@@ -16,4 +16,9 @@ class Cuenta extends Authenticatable
     public $timestamps = false;
 
     public $primaryKey = 'CUE_ID';
+
+    public function getAuthPassword()
+    {
+        return $this->CUE_PASSWORD;
+    }
 }
