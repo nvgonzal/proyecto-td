@@ -14,7 +14,7 @@ class CreateTableEnvios extends Migration
     {
         Schema::create('ENVIOS', function (Blueprint $table) {
             $table->increments('ENV_ID');
-            $table->integer('CLI_ID')->unsigned();
+            $table->integer('CLI_ID')->unsigned()->nullable();
             $table->integer('TRA_ID')->unsigned()->nullable();
             $table->string('ENV_DIRECCION_RECOGIDA');
             $table->string('ENV_DIRECCION_DESTINO');
@@ -29,7 +29,7 @@ class CreateTableEnvios extends Migration
             $table->string('ENV_COORDENADAS_RECOGIDA',150);
             $table->string('ENV_COORDENADAS_DESTINO',150);
             $table->boolean('ENV_ESTADO');
-            $table->foreign('CLI_ID')->references('CLI_ID')->on('CLIENTES')->onDelete('cascade');
+            $table->foreign('CLI_ID')->references('CLI_ID')->on('CLIENTES');
             $table->foreign('TRA_ID')->references('TRA_ID')->on('TRANSPORTISTAS');
         });
     }
