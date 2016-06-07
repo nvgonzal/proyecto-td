@@ -90,6 +90,17 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
+                                {!! Form::label('telefono','Telefono',['class'=>'col-md-3']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('telefono',null,['class'=>'form-control']) !!}
+                                    @if ($errors->has('telefono'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group {{ $errors->has('tipo') ? ' has-error' : '' }}">
                                 <label class="col-md-3">Tipo de cuenta</label>
 
@@ -108,11 +119,12 @@
                                     </span>
                                 @endif
                             </div>
-                            {!! Form::submit('Ingresar cuenta',['class'=>'btn btn-success btn-lg btn-block']) !!}
                         </fieldset>
-                        {!! Form::close() !!}
                     </div>
-
+                    <div class="panel-footer">
+                        {!! Form::submit('Ingresar cuenta',['class'=>'btn btn-primary btn-lg btn-block']) !!}
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
