@@ -159,6 +159,7 @@ return [
         Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        GeneaLabs\Phpgmaps\PhpgmapsServiceProvider::class,
 
     ],
 
@@ -210,6 +211,7 @@ return [
         'Rut'   => Freshwork\ChileanBundle\Laravel\Facades\Rut::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Flash' => Laracasts\Flash\Flash::class,
+        'Gmaps' => GeneaLabs\Phpgmaps\Facades\PhpgmapsFacade::class,
     ],
 
 ];

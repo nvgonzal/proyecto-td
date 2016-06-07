@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f707d6b378056efdfefc0ab7349aa3f",
-    "content-hash": "0040058bec8eb86372983206e24e11dd",
+    "hash": "5845f402bf27510c9fb31eb14ef789e7",
+    "content-hash": "2d89253a495552834c119cdf0b74df3f",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -262,6 +262,61 @@
                 "validation"
             ],
             "time": "2016-04-14 16:13:32"
+        },
+        {
+            "name": "genealabs/phpgmaps",
+            "version": "0.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/Phpgmaps.git",
+                "reference": "45226b7306d6e4f07eb2f2fc1778b0bdb3042bd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/Phpgmaps/zipball/45226b7306d6e4f07eb2f2fc1778b0bdb3042bd1",
+                "reference": "45226b7306d6e4f07eb2f2fc1778b0bdb3042bd1",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-laravel4": "1.0-dev",
+                    "dev-develop": "2.0-dev",
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\Phpgmaps\\": "src/GeneaLabs/Phpgmaps/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "mike@genealabs.com",
+                    "role": "maintainer"
+                },
+                {
+                    "name": "Michael Hopkins",
+                    "role": "developer"
+                }
+            ],
+            "description": "Laravel implementation of BIOSTALL's CodeIgniter Google Maps API, originally by Michael Hopkins at Appitventures.",
+            "keywords": [
+                "biostall",
+                "googlemaps",
+                "laravel",
+                "phpgmaps"
+            ],
+            "time": "2016-01-12 04:29:58"
         },
         {
             "name": "jakub-onderka/php-console-color",
