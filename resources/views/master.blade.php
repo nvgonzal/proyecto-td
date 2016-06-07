@@ -44,7 +44,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Cuenta</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Gestion de cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Editar informacion</a></li>
                         <li role="separator" class="divider"></li>
@@ -62,7 +63,10 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+<div class="container">
+    @include('flash::message')
     @yield('contenido')
+</div>
 
     {!! Html::script('js/jquery-1.12.4.js') !!}
     {!! Html::script('js/bootstrap.js') !!}

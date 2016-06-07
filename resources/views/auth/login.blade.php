@@ -34,9 +34,12 @@
                                     {!! Form::checkbox('remember','Mantener sesión') !!} Mantener sesión
                                 </label>
                             </div>
-                            {!! Form::submit('Iniciar sesion',['class'=>'btn btn-lg btn-success btn-block']) !!}
+                            {!! Form::submit('Iniciar sesion',['class'=>'btn btn-lg btn-primary btn-block']) !!}
                         </fieldset>
                         {!! Form::close() !!}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{URL::to('password/reset/')}}">Recuperar contraseña</a>
                     </div>
                 </div>
             </div>
