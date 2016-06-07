@@ -45,7 +45,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout', 'deleteForm', 'logoutAndDelete']]);
     }
 
     /**
@@ -64,6 +64,7 @@ class AuthController extends Controller
             'tipo'              => 'required|in:cliente,transportista,ambos',
             'email'             => 'required|email|max:255|unique:CUENTAS,CUE_EMAIL',
             'password'          => 'required|min:6|confirmed',
+            'telefono' => 'required|min:6|max:30'
         ]);
     }
 
@@ -83,6 +84,7 @@ class AuthController extends Controller
         $cuenta->setAttribute('CUE_RUT', $data['rut']);
         $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
         $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
+        $cuenta->setAttribute('CUE_TELEFONO', $data['telefono']);
         $cuenta->save();
         $tCuenta = $cuenta->getAttribute('CUE_TIPO');
         switch ($tCuenta) {
@@ -123,6 +125,55 @@ class AuthController extends Controller
         } else {
             Flash::error('Email o contraseña no coinciden');
             return redirect()->to('/login');
+        }
+
+    }
+
+    /**
+     * Muestra el formulario para confirmar eliminacion de cuenta
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deleteForm()
+    {
+        if (Auth::check()) {
+            return view('auth.delete');
+        } else {
+            return redirect('/');
+        }
+    }
+
+    /**
+     * Cierra sesion y elimina la cuenta
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logoutAndDelete(Request $request)
+    {
+        if (Auth::check()) {
+            $this->validate($request, [
+                'password' => 'required|confirmed'
+            ]);
+
+            $id = Auth::user()->CUE_ID;
+            $cuenta = Cuenta::find($id);
+            if (Hash::check($request['password'], $cuenta->CUE_PASSWORD)) {
+                Auth::guard($this->getGuard())->logout();
+                if ($cuenta->trasportista != null) {
+                    $cuenta->trasportista->delete();
+                }
+                if ($cuenta->cliente != null) {
+                    $cuenta->cliente->delete();
+                }
+                $cuenta->delete();
+                return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+            } else {
+                Flass::error('Contraseña incorrecta');
+                return redirect('logout/delete');
+            }
+        } else {
+            return redirect('/');
         }
 
     }
