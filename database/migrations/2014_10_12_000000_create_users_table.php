@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('CUE_APELL_PATERNO',60);
             $table->string('CUE_APELL_MATERNO',60);
             $table->string('CUE_TIPO',15);
-            $table->string('CUE_TELOFONO',40);
+            $table->string('CUE_TELEFONO', 40);
             $table->rememberToken();
         });
     }
