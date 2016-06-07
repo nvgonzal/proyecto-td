@@ -60,7 +60,7 @@ class AuthController extends Controller
             'nombres'           => 'required|max:60',
             'apellido_paterno'  => 'required|max:60',
             'apellido_materno'  => 'required|max:60',
-            'rut'               => 'required|cl_rut|max:12',
+            'rut' => 'required|cl_rut|max:12|unique:CUENTAS,CUE_RUT',
             'tipo'              => 'required|in:cliente,transportista,ambos',
             'email'             => 'required|email|max:255|unique:CUENTAS,CUE_EMAIL',
             'password'          => 'required|min:6|confirmed',
@@ -169,7 +169,7 @@ class AuthController extends Controller
                 $cuenta->delete();
                 return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
             } else {
-                Flass::error('Contraseña incorrecta');
+                Flash::error('Contraseña incorrecta');
                 return redirect('logout/delete');
             }
         } else {

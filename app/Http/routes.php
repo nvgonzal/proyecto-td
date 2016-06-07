@@ -35,3 +35,4 @@ Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\Pa
 Route::get('logout/delete', ['as' => 'auth.logout.delete', 'uses' => 'Auth\AuthController@deleteForm']);
 Route::post('logout/delete', ['as' => 'auth.logout.delete', 'uses' => 'Auth\AuthController@logoutAndDelete']);
 
+Route::get('cuenta/edit', ['uses' => 'CuentasController@edit']);
