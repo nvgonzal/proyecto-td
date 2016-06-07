@@ -15,4 +15,14 @@ class Cliente extends Model
         return $this->belongsTo('App\Cuenta', 'CUE_ID', 'CUE_ID');
     }
 
+    public function empresa()
+    {
+        return $this->belongsTo('App\Empresas', 'CLI_ID');
+    }
+
+    public function envios()
+    {
+        return $this->hasMany('App\Envio', 'CLI_ID');
+    }
+
 }

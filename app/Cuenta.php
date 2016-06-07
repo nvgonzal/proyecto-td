@@ -27,11 +27,6 @@ class Cuenta extends Authenticatable
         return $this->hasOne('App\Cliente', 'CUE_ID');
     }
 
-    public function telefonos()
-    {
-        return $this->hasMany('App\Telefonos', 'CUE_ID');
-    }
-
     public function getAuthPassword()
     {
         return $this->CUE_PASSWORD;
