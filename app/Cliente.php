@@ -8,7 +8,7 @@ class Cliente extends Model
 {
     protected $table = 'dbo.CLIENTES';
     public $timestamps = false;
-    protected $primaryKey = 'TRA_ID';
+    protected $primaryKey = 'CLI_ID';
 
 
 }
