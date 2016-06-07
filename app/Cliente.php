@@ -10,5 +10,9 @@ class Cliente extends Model
     public $timestamps = false;
     protected $primaryKey = 'CLI_ID';
 
+    public function cuenta()
+    {
+        return $this->belongsTo('App\Cuenta', 'CUE_ID', 'CUE_ID');
+    }
 
 }

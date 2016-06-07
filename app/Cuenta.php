@@ -17,8 +17,29 @@ class Cuenta extends Authenticatable
 
     public $primaryKey = 'CUE_ID';
 
+    public function trasportista()
+    {
+        return $this->hasOne('App\Trasportista', 'CUE_ID');
+    }
+
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente', 'CUE_ID');
+    }
+
+    public function telefonos()
+    {
+        return $this->hasMany('App\Telefonos', 'CUE_ID');
+    }
+
     public function getAuthPassword()
     {
         return $this->CUE_PASSWORD;
     }
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->CUE_EMAIL;
+    }
+
 }
