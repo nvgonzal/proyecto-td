@@ -8,5 +8,5 @@ class Trasportista extends Model
 {
     protected $table = 'dbo.TRANSPORTISTAS';
     public $timestamps = false;
-    protected $primaryKey = 'CLI_ID';
+    protected $primaryKey = 'TRA_ID';
 }
