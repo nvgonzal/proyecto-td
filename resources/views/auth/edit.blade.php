@@ -1,0 +1,157 @@
+@extends('master')
+
+@section('titulo','Editar Informacion')
+
+@section('contenido')
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Editar Informacion</h3>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                            Informacion Personal</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {!!
+                                        Form::model($infoCuenta,['class'=>'form-horizontal','route'=>'auth.edit.per','method'=>'put'])
+                                        !!}
+                                        <div class="form-group {{ $errors->has('rut') ? ' has-error' : '' }}">
+                                            {!! Form::label('rut','RUT',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::text('rut',null,['class'=>'form-control']) !!}
+                                                @if ($errors->has('rut'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('rut') }}</strong>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group {{ $errors->has('nombres') ? ' has-error' : '' }}">
+                                            {!! Form::label('nombres','Nombres',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::text('nombres',null,['class'=>'form-control']) !!}
+                                                @if ($errors->has('nombres'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('nombres') }}</strong>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group {{ $errors->has('apellido_paterno') ? ' has-error' : '' }}">
+                                            {!! Form::label('apellido_paterno','Apellido Paterno',['class'=>'col-md-3'])
+                                            !!}
+                                            <div class="col-md-9">
+                                                {!! Form::text('apellido_paterno',null,['class'=>'form-control']) !!}
+                                                @if ($errors->has('apellido_paterno'))
+                                                    <span class="help-block">
+                                        <strong>{{ $errors->first('apellido_paterno') }}</strong>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="form-group {{ $errors->has('apellido_materno') ? ' has-error' : '' }}">
+                                            {!! Form::label('apellido_materno','Apellido
+                                            Materno',['class'=>'col-md-3'])!!}
+                                            <div class="col-md-9">
+                                                {!! Form::text('apellido_materno',null,['class'=>'form-control']) !!}
+                                                @if ($errors->has('apellido_materno'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('apellido_materno') }}</strong>
+                                        </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        {!! Form::submit('Guardar cambios',['class'=>'btn btn-success btn-lg
+                                        btn-block']) !!}
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                            Cambio de contraseña</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {!! Form::open(['class'=>'form-horizontal','route'=>'auth.register']) !!}
+                                        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                                            {!! Form::label('oldPassword','Contraseña Antigua',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::password('oldPassword',['class'=>'form-control']) !!}
+                                                @if ($errors->has('oldPassword'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('oldPassword') }}</strong>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+                                            {!! Form::label('password','Nueva Contraseña',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::password('password',['class'=>'form-control']) !!}
+                                                @if ($errors->has('password'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                            {!! Form::label('password_confirmation','Confirmar nueva contraseña',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::password('password_confirmation',['class'=>'form-control']) !!}
+                                                @if ($errors->has('password_confirmation'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            {!! Form::submit('Cambiar contraseña',['class'=>'btn btn-success btn-lg btn-block']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                            Tipo de cuenta</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                        commodo consequat.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop
