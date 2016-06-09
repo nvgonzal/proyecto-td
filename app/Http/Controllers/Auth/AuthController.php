@@ -84,7 +84,7 @@ class AuthController extends Controller
         $cuenta->setAttribute('CUE_RUT', $data['rut']);
         $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
         $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
-        $cuenta->setAttribute('CUE_TELEFONO', $data['telefono']);
+        $cuenta->setAttribute('CUE_TELOFONO', $data['telefono']);
         $cuenta->save();
         $tCuenta = $cuenta->getAttribute('CUE_TIPO');
         switch ($tCuenta) {
@@ -177,5 +177,4 @@ class AuthController extends Controller
         }
 
     }
-
 }
