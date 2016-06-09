@@ -35,4 +35,9 @@ Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\Pa
 Route::get('logout/delete', ['as' => 'auth.logout.delete', 'uses' => 'Auth\AuthController@deleteForm']);
 Route::post('logout/delete', ['as' => 'auth.logout.delete', 'uses' => 'Auth\AuthController@logoutAndDelete']);
 
-Route::get('cuenta/edit', ['uses' => 'CuentasController@edit']);
+//Ruta para Editar la cuenta
+Route::get('edit',['as'=>'auth.edit','uses'=>'CuentasController@edit']);
+Route::put('edit/per',['as'=>'auth.edit.per','uses'=>'CuentasController@editInformacionPersonal']);
+Route::put('edit/pass',['as'=>'auth.edit.pass','uses'=>'CuentasController@editPassword']);
+// Route::post('edit',['as'=>'auth.edit','uses'=>'CuentasController@editInformacionPersonal']);
+
