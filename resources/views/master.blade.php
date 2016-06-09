@@ -47,7 +47,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Gestion de cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Editar informacion</a></li>
+                        <li><a href="{{URL::to('/edit')}}">Editar Informacion</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{URL::to('/logout')}}">Cerrar sesion</a></li>
                     </ul>
