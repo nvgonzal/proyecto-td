@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Trasportista extends Model
+class Transportista extends Model
 {
     protected $table = 'dbo.TRANSPORTISTAS';
     public $timestamps = false;
@@ -17,7 +17,7 @@ class Trasportista extends Model
 
     public function licencias()
     {
-        return $this->belongsToMany('App\Licencia', 'dbo.TRASPORTISTAS_CLIENTES', 'TRA_ID', 'LIC_ID');
+        return $this->belongsToMany('App\Licencia', 'dbo.TRANSPORTISTAS_CLIENTES', 'TRA_ID', 'LIC_ID');
     }
 
     public function vehiculos()

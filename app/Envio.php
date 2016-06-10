@@ -16,8 +16,8 @@ class Envio extends Model
         return $this->belongsTo('App\Cliente', 'CLI_ID');
     }
 
-    public function trasportista()
+    public function transportista()
     {
-        return $this->belongsTo('App\Trasportista', 'TRA_ID');
+        return $this->belongsTo('App\Transportista', 'TRA_ID');
     }
 }

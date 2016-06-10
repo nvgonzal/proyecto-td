@@ -11,8 +11,8 @@ class Licencia extends Model
 
     public $timestamps = false;
 
-    public function trasportistas()
+    public function transportistas()
     {
-        return $this->belongsToMany('App\Trasportistas', 'dbo.TRASPORTISTAS_CLIENTES', 'LIC_ID', 'TRA_ID');
+        return $this->belongsToMany('App\Transportistas', 'dbo.TRANSPORTISTAS_CLIENTES', 'LIC_ID', 'TRA_ID');
     }
 }
