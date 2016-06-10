@@ -39,5 +39,6 @@ Route::post('logout/delete', ['as' => 'auth.logout.delete', 'uses' => 'Auth\Auth
 Route::get('edit',['as'=>'auth.edit','uses'=>'CuentasController@edit']);
 Route::put('edit/per',['as'=>'auth.edit.per','uses'=>'CuentasController@editInformacionPersonal']);
 Route::put('edit/pass',['as'=>'auth.edit.pass','uses'=>'CuentasController@editPassword']);
+Route::put('edit/cue',['as'=>'auth.edit.cue','uses'=>'CuentasController@editInformacionCuenta']);
 // Route::post('edit',['as'=>'auth.edit','uses'=>'CuentasController@editInformacionPersonal']);
 
