@@ -91,9 +91,12 @@
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        {!! Form::open(['class'=>'form-horizontal','route'=>'auth.register']) !!}
-                                        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                                            {!! Form::label('oldPassword','Contraseña Antigua',['class'=>'col-md-3']) !!}
+                                        {!!
+                                        Form::open(['class'=>'form-horizontal','route'=>'auth.edit.pass','method'=>'put'])
+                                        !!}
+                                        <div class="form-group {{ $errors->has('oldPassword') ? ' has-error' : '' }}">
+                                            {!! Form::label('oldPassword','Contraseña Antigua',['class'=>'col-md-3'])
+                                            !!}
                                             <div class="col-md-9">
                                                 {!! Form::password('oldPassword',['class'=>'form-control']) !!}
                                                 @if ($errors->has('oldPassword'))
@@ -114,19 +117,23 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                            {!! Form::label('password_confirmation','Confirmar nueva contraseña',['class'=>'col-md-3']) !!}
+                                        <div
+                                            class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                            {!! Form::label('password_confirmation','Confirmar nueva
+                                            contraseña',['class'=>'col-md-3']) !!}
                                             <div class="col-md-9">
-                                                {!! Form::password('password_confirmation',['class'=>'form-control']) !!}
+                                                {!! Form::password('password_confirmation',['class'=>'form-control'])
+                                                !!}
                                                 @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
+                                                 <span class="help-block">
+                                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                                </span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="panel-footer">
-                                            {!! Form::submit('Cambiar contraseña',['class'=>'btn btn-success btn-lg btn-block']) !!}
+                                            {!! Form::submit('Cambiar contraseña',['class'=>'btn btn-success btn-lg
+                                            btn-block']) !!}
                                         </div>
                                         {!! Form::close() !!}
                                     </div>
@@ -136,14 +143,49 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                            Tipo de cuenta</a>
+                                            Informacion de cuenta</a>
                                     </h4>
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse">
-                                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.
+                                    <div class="panel-body">
+                                        {!!
+                                        Form::model($infoCuenta,['class'=>'form-horizontal','route'=>'auth.edit.cue','method'=>'put'])
+                                        !!}
+
+                                        <div class="form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
+                                            {!! Form::label('telefono','Telefono',['class'=>'col-md-3']) !!}
+                                            <div class="col-md-9">
+                                                {!! Form::text('telefono',null,['class'=>'form-control']) !!}
+                                                @if ($errors->has('telefono'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group {{ $errors->has('tipo') ? ' has-error' : '' }}">
+                                            <label class="col-md-3">Tipo de cuenta</label>
+
+                                            <label class="radio-inline">
+                                                {!! Form::radio('tipo','transportista') !!} Trasportista.
+                                            </label>
+                                            <label class="radio-inline">
+                                                {!! Form::radio('tipo','cliente') !!} Cliente.
+                                            </label>
+                                            <label class="radio-inline">
+                                                {!! Form::radio('tipo','ambos') !!} Ambos.
+                                            </label>
+                                            @if ($errors->has('tipo'))
+                                    <span class="help-block col-md-offset-3">
+                                        <strong>{{ $errors->first('tipo') }}</strong>
+                                    </span>
+                                            @endif
+                                        </div>
+                                        <div class="panel-footer">
+                                            {!! Form::submit('Guardar cambios',['class'=>'btn btn-success btn-lg
+                                            btn-block']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>
