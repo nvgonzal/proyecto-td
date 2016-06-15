@@ -51,7 +51,7 @@ class CuentasController extends Controller
             'nombres' => Auth::user()->CUE_NOMBRES,
             'apellido_paterno' => Auth::user()->CUE_APELL_PATERNO,
             'apellido_materno' => Auth::user()->CUE_APELL_MATERNO,
-            'telefono' => Auth::user()->CUE_TELOFONO,
+            'telefono' => Auth::user()->CUE_TELEFONO,
             'tipo' => Auth::user()->CUE_TIPO
         ];
         return $infoCuenta;
@@ -119,18 +119,17 @@ class CuentasController extends Controller
     }
     public function editInformacionCuenta(Request $request){
         $this->validate($request,[
-            'telefono' => 'required',
-            'tipo' => 'required'
+            'telefono' => 'required|min:6',
+            'tipo' => 'required|in:cliente,transportista,ambos'
         ]);
         $id = Auth::user()->CUE_ID;
         $cuenta = Cuenta::find($id);
-        $cuenta->CUE_TELOFONO = $request['telefono'];
+        $cuenta->CUE_TELEFONO = $request['telefono'];
         $oldType = Auth::user()->CUE_TIPO;
         $cuenta->CUE_TIPO = $request['tipo'];
         $exito=$cuenta->save();
         switch($oldType){
             case 'cliente':
-
                 if ($cuenta->cliente != null) {
                     $cuenta->cliente->delete();
                 }
