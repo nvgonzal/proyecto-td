@@ -63,12 +63,15 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+
 <div class="container">
     @include('flash::message')
-    @yield('contenido')
 </div>
 
-    {!! Html::script('js/jquery-1.12.4.js') !!}
+@yield('contenido')
+
+
+{!! Html::script('js/jquery-1.12.4.js') !!}
     {!! Html::script('js/bootstrap.js') !!}
     @yield('js')
 </body>
