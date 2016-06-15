@@ -7,7 +7,7 @@ use Hash;
 use Flash;
 use App\Cliente;
 use App\Cuenta;
-use App\Trasportista;
+use App\Transportista;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -64,7 +64,8 @@ class AuthController extends Controller
             'tipo'              => 'required|in:cliente,transportista,ambos',
             'email'             => 'required|email|max:255|unique:CUENTAS,CUE_EMAIL',
             'password'          => 'required|min:6|confirmed',
-            'telefono' => 'required|min:6|max:30'
+            'telefono' => 'required|min:6|max:30',
+            'id_empresa' => 'numeric',
         ]);
     }
 
@@ -84,7 +85,7 @@ class AuthController extends Controller
         $cuenta->setAttribute('CUE_RUT', $data['rut']);
         $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
         $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
-        $cuenta->setAttribute('CUE_TELOFONO', $data['telefono']);
+        $cuenta->setAttribute('CUE_TELEFONO', $data['telefono']);
         $cuenta->save();
         $tCuenta = $cuenta->getAttribute('CUE_TIPO');
         switch ($tCuenta) {
@@ -92,10 +93,11 @@ class AuthController extends Controller
                 $cliente = new Cliente();
                 $cliente->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
                 $cliente->setAttribute('CLI_VALORACION', '0');
+                $cliente->setAttribute('EMP_ID', $data['id_empresa']);
                 $cliente->save();
                 break;
             case 'trasportista':
-                $trasnportista = new Trasportista();
+                $trasnportista = new Transportista();
                 $trasnportista->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
                 $trasnportista->setAttribute('TRA_VALORACION', '0');
                 $trasnportista->save();
@@ -104,8 +106,9 @@ class AuthController extends Controller
                 $cliente = new Cliente();
                 $cliente->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
                 $cliente->setAttribute('CLI_VALORACION', '0');
+                $cliente->setAttribute('EMP_ID', $data['id_empresa']);
                 $cliente->save();
-                $trasnportista = new Trasportista();
+                $trasnportista = new Transportista();
                 $trasnportista->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
                 $trasnportista->setAttribute('TRA_VALORACION', '0');
                 $trasnportista->save();
