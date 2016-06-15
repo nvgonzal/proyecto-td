@@ -7,8 +7,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
+                <div class="panel-heading">
+                    <h2>¡Bienvenido!</h2>
+                </div>
                 <div class="panel-body">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
