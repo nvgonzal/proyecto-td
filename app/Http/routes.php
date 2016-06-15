@@ -40,5 +40,17 @@ Route::get('edit',['as'=>'auth.edit','uses'=>'CuentasController@edit']);
 Route::put('edit/per',['as'=>'auth.edit.per','uses'=>'CuentasController@editInformacionPersonal']);
 Route::put('edit/pass',['as'=>'auth.edit.pass','uses'=>'CuentasController@editPassword']);
 Route::put('edit/cue',['as'=>'auth.edit.cue','uses'=>'CuentasController@editInformacionCuenta']);
-// Route::post('edit',['as'=>'auth.edit','uses'=>'CuentasController@editInformacionPersonal']);
 
+Route::group(['prefix' => 'transportista', 'middleware' => ['tran', 'auth']], function () {
+    //Rutas para CRUD de vehiculo
+    Route::get('mis-vehiculos/', ['as' => 'vehiculos', 'uses' => 'VehiculoController@index']);
+    Route::get('mis-vehiculos/create', ['as' => 'vehiculos.create', 'uses' => 'VehiculoController@create']);
+    Route::get('mis-vehiculos/{id}', ['as' => 'vehiculos.show', 'uses' => 'VehiculoController@show']);
+
+});
+
+Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
+
+});
+
+//Route::get('empresa/{id}',[]);
