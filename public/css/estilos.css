@@ -1,3 +1,7 @@
 .boton-fixed {
     position: fixed;
 }
+
+.oculto {
+    display: none;
+}
