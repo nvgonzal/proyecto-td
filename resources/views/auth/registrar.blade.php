@@ -2,6 +2,11 @@
 
 @section('titulo','Registro de cuenta')
 
+@section('css')
+    {!! Html::style('css/estilos.css') !!}
+
+@stop
+
 @section('contenido')
     <div class="container">
         <div class="row">
@@ -101,23 +106,40 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group {{ $errors->has('tipo') ? ' has-error' : '' }}">
+                            <div id='tipo' class="form-group {{ $errors->has('tipo') ? ' has-error' : '' }}">
                                 <label class="col-md-3">Tipo de cuenta</label>
 
                                 <label class="radio-inline">
                                     {!! Form::radio('tipo','transportista') !!} Trasportista.
                                 </label>
                                 <label class="radio-inline">
-                                    {!! Form::radio('tipo','cliente') !!} Cliente.
+                                    {!! Form::radio('tipo','cliente',['id'=>'cliente']) !!} Cliente.
                                 </label>
                                 <label class="radio-inline">
-                                    {!! Form::radio('tipo','ambos') !!} Ambos.
+                                    {!! Form::radio('tipo','ambos',['id'=>'ambos']) !!} Ambos.
                                 </label>
                                 @if ($errors->has('tipo'))
                                     <span class="help-block col-md-offset-3">
                                         <strong>{{ $errors->first('tipo') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                            <div id="empresas"
+                                 class="form-group oculto {{ $errors->has('empresas') ? ' has-error' : '' }}">
+                                {!! Form::label('empresas','Empresa a la que perteneces',['class'=>'col-md-3']) !!}
+                                <div class="col-md-9">
+                                    <select class="form-control" id="id_empresa" name="id_empresa">
+                                        <option value=null>Sin empresa</option>
+                                        @foreach(\App\Empresa::all() as $empresa)
+                                            <option value="{{$empresa->EMP_ID}}">{{$empresa->EMP_NOMBRE}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('empresas'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('empresas') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                         </fieldset>
                     </div>
