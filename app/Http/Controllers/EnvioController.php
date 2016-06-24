@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Envio;
 use Illuminate\Http\Request;
-
+use Debugbar;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use App\Cuenta;
 
 class EnvioController extends Controller
 {
@@ -15,7 +18,7 @@ class EnvioController extends Controller
      */
     public function index()
     {
-        //
+        return view('envio.verhistorial')->with('envios',Envio::where('CLI_ID',Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID)->paginate(10));
     }
 
     /**
