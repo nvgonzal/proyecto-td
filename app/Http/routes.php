@@ -48,9 +48,10 @@ Route::group(['prefix' => 'transportista', 'middleware' => ['tran', 'auth']], fu
     Route::get('mis-vehiculos/{id}', ['as' => 'vehiculos.show', 'uses' => 'VehiculoController@show']);
 
 });
-
 Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
 
+    Route::get('verhistorial',['as'=>'envio.verhistorial','uses'=>'EnvioController@index']);
 });
+
 
 //Route::get('empresa/{id}',[]);
