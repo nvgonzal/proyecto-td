@@ -11,7 +11,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Historial de envios</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" >
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
