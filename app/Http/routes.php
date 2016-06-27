@@ -50,6 +50,7 @@ Route::group(['prefix' => 'transportista', 'middleware' => ['tran', 'auth']], fu
 });
 
 Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
+    Route::get('verhistorial',['as'=>'envio.verhistorial','uses'=>'EnvioController@index']);
     Route::get('envio/create/', ['as' => 'envio.create', 'uses' => 'EnvioController@create']);
     Route::post('envio/create/', ['as' => 'envio.store', 'uses' => 'EnvioController@store']);
     Route::get('envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);

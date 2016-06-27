@@ -20,20 +20,21 @@
             </button>
             <a class="navbar-brand" href="#">Niru</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Link</a></li>
                 <li class="dropdown">
+                    @if(Auth::check())
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion envios<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Ver envios activos</a></li>
-                        <li><a href="#">Ver Historial de envios</a></li>
+                        <li><a href="{{URL::to('/cliente/verhistorial')}}">Ver Historial de envios</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Creacion de envios</a></li>
                     </ul>
+                    @endif
                 </li>
             </ul>
             <!--Busqueda-->

@@ -21,7 +21,9 @@
                                         </h4>
                                     </div>
                                     <div id="collapse1" class="panel-collapse collapse">
+
                                         <div class="panel-body">
+                                            <fieldset>
                                             {!!
                                             Form::model($infoCuenta,['class'=>'form-horizontal','route'=>'auth.edit.per','method'=>'put'])
                                             !!}
