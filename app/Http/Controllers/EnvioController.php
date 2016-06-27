@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
 use App\Cuenta;
 use App\Envio;
 use Illuminate\Http\Request;
@@ -11,7 +10,6 @@ use App\Http\Requests;
 use Gmaps;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
-use Psy\Test\Exception\BreakExceptionTest;
 
 class EnvioController extends Controller
 {
@@ -104,12 +102,11 @@ class EnvioController extends Controller
                 $coor = $lat . ' , ' . $lng;
                 $envio->setAttribute('ENV_COORDENADAS_DESTINO', $coor);
                 break;
-                break;
         }
         $exito = $envio->save();
         if ($exito) {
             Flash::success('Envio ingresado con exito');
-            return redirect('/cliente/envio/create');
+            return $this->show($envio->ENV_ID);
         } else {
             Flash::error('No pudo ingresar envio');
             return redirect('/cliente/envio/create');
@@ -124,7 +121,24 @@ class EnvioController extends Controller
      */
     public function show($id)
     {
-        //
+        $envio = Envio::find($id);
+
+        $config = array();
+        $config['zoom'] = 'auto';
+        $config['apiKey'] = 'AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc';
+
+        Gmaps::initialize($config);
+        $marcadorRecogida = array();
+        $marcadorRecogida['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
+        Gmaps::add_marker($marcadorRecogida);
+
+        $marcadorDestino = array();
+        $marcadorDestino['position'] = $envio->ENV_COORDENADAS_DESTINO;
+        Gmaps::add_marker($marcadorDestino);
+
+        $map = Gmaps::create_map();
+        return view('envio.show')->with('envio', $envio)->with('map', $map);
+
     }
 
     /**
