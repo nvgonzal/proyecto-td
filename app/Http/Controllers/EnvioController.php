@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
+use App\Cuenta;
+use App\Envio;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Gmaps;
+use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
+use Psy\Test\Exception\BreakExceptionTest;
 
 class EnvioController extends Controller
 {
