@@ -10,7 +10,7 @@ $(function () {
     direccionDestino.geocomplete();
 
     $('.datepicker').datepicker({
-        format: "dd-mm-yyyy",
+        format: "dd/mm/yyyy",
         todayBtn: true,
         language: "es",
         todayHighlight: true
