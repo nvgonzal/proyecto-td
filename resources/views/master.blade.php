@@ -32,7 +32,7 @@
                         <li><a href="#">Ver envios activos</a></li>
                         <li><a href="{{URL::to('/cliente/verhistorial')}}">Ver Historial de envios</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Creacion de envios</a></li>
+                        <li><a href="{{URL::to('/cliente/envio/create')}}">Creacion de envios</a></li>
                     </ul>
                     @endif
                 </li>
