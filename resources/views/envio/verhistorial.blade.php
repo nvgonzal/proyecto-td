@@ -35,7 +35,7 @@
                                     </a>
                                 </td><td>
                                     <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Editar informacion"
-                                       href="">
+                                       href="{{URL::to('/cliente/envio/edit/'.$envio->ENV_ID)}}">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>
                                 </td><td>
