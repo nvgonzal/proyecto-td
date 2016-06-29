@@ -5,3 +5,8 @@
 .oculto {
     display: none;
 }
+
+.requerido {
+    color: #ff3e23;
+    text-align: center;
+}
