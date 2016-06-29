@@ -49,8 +49,8 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                               title="Eliminar empleado"
-                                               href="#">
+                                               title="Eliminar envio"
+                                               href="{{URL::to('cliente/envio/delete/'.$envio->ENV_ID)}}">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </td>
