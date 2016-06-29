@@ -24,7 +24,7 @@
                                 <th>Eliminar</th>
                                 </thead>
                                 @foreach($envios as $envio)
-                                    <tr>
+                                    <tr data-id="{{$envio->ENV_ID}}">
                                         <td>{{$envio->ENV_DESCRIPCION}}</td>
                                         <td>{{$envio->ENV_DIRECCION_RECOGIDA}}</td>
                                         <td>{{$envio->ENV_DIRECCION_DESTINO}}</td>
@@ -43,12 +43,12 @@
                                         <td>
                                             <a class="btn btn-warning btn-sm" data-toggle="tooltip"
                                                title="Editar informacion"
-                                               href="#">
+                                               href="{{URL::to('cliente/envio/edit/'.$envio->ENV_ID)}}">
                                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                            <a id="boton-eliminar" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                title="Eliminar empleado"
                                                href="#">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -69,6 +69,19 @@
 
 @section('js')
     <script type="text/javascript">
-        $('[data-toggle="tooltip"]').tooltip();
+        $(function () {
+            $('tr').on('click', 'a', function () {
+                var id = $(this).closest('tr').data('id');
+                var url = 'http://localhost/proyecto_td/public/index.php/cliente/envio/delete/' + id;
+                var botonAceptar = $('<a id="boton-eliminar" class="btn btn-primary btn-sm" data-toggle="tooltip" ' +
+                        'title="Confirmar eliminacion" href="' + url + '"> <span class="glyphicon glyphicon-ok" ' +
+                        'aria-hidden="true"></span> </a>');
+                $(this).closest('td').append(botonAceptar).tooltip();
+                $(this).tooltip('hide');
+                $(this).remove();
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 @stop
