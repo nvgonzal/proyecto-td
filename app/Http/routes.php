@@ -57,6 +57,7 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
     Route::post('envio/create/', ['as' => 'envio.store', 'uses' => 'EnvioController@store']);
     Route::get('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@edit']);
     Route::post('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@update']);
+    Route::get('envio/delete/{id}',['as' => 'envio.delete', 'uses' => 'EnvioController@destroy']);
     Route::get('envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
 });
 
