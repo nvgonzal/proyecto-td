@@ -217,7 +217,15 @@ class EnvioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $envio = Envio::find($id);
+        $exito = $envio->delete();
+        if ($exito) {
+            Flash::success('Envio borrado con exito');
+            return redirect('/cliente/verhistorial');
+        } else {
+            Flash::error('Envio no pudo ser borrado');
+            return redirect('/cliente/verhistorial');
+        }
     }
 
     public function verEnvios()
