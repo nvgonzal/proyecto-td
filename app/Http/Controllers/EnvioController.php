@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Gmaps;
+use URL;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 
 class EnvioController extends Controller
 {
+    private $apiKey = 'AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc';
+
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +70,7 @@ class EnvioController extends Controller
         $direccion = $request['direccion_recogida'];
         $direccion = str_replace(' ', '+', $direccion);
         $url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-            . $direccion . "&key=AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc";
+            . $direccion . "&key=" . $this->apiKey;
         $recogida = file_get_contents($url);
         $objetoRecogida = json_decode($recogida);
         switch ($objetoRecogida->status) {
@@ -87,7 +90,7 @@ class EnvioController extends Controller
         $direccion = $request['direccion_destino'];
         $direccion = str_replace(' ', '+', $direccion);
         $url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-            . $direccion . "&key=AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc";
+            . $direccion . "&key=" . $this->apiKey;
         $recogida = file_get_contents($url);//Conecta con API de google para trasformar direccion en coordenadas
         $objetoDestino = json_decode($recogida);//trasforma el JSON a un arreglo
         switch ($objetoDestino->status) {
@@ -125,15 +128,18 @@ class EnvioController extends Controller
 
         $config = array();
         $config['zoom'] = 'auto';
-        $config['apiKey'] = 'AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc';
+        $config['map_height'] = '540px';
+        $config['apiKey'] = $this->apiKey;
 
         Gmaps::initialize($config);
         $marcadorRecogida = array();
         $marcadorRecogida['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
+        $marcadorRecogida['icon'] = 'http://localhost/proyecto_td/public/img/package-for-delivery.png';
         Gmaps::add_marker($marcadorRecogida);
 
         $marcadorDestino = array();
         $marcadorDestino['position'] = $envio->ENV_COORDENADAS_DESTINO;
+        $marcadorDestino['icon'] = 'http://localhost/proyecto_td/public/img/flag.png';
         Gmaps::add_marker($marcadorDestino);
 
         $map = Gmaps::create_map();
@@ -173,5 +179,29 @@ class EnvioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function verEnvios()
+    {
+        $envios = Envio::where('ENV_ESTADO', true)->get();
+        $config = array();
+        $config['center'] = 'auto';
+        $config['zoom'] = '13';
+        $config['apiKey'] = $this->apiKey;
+        $config['map_height'] = '540px';
+
+        Gmaps::initialize($config);
+
+        foreach ($envios as $envio) {
+            $marcador = array();
+            $marcador['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
+            $marcador['icon'] = 'http://localhost/proyecto_td/public/img/package-for-delivery.png';
+            $marcador['infowindow_content'] = '<a href="' . URL::to('cliente/envio/' . $envio->ENV_ID)
+                . '">' . $envio->ENV_DESCRIPCION . '</a>';
+            Gmaps::add_marker($marcador);
+        }
+        $map = Gmaps::create_map();
+        //dd($map);
+        return view('envio/verEnvios')->with('map', $map);
     }
 }
