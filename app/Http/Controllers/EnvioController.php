@@ -217,7 +217,12 @@ class EnvioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::check()) {
+            Envio::find($id)->delete();
+            return view('envio.edit')->with($id);
+        }else{
+            return view('/');
+        }
     }
 
     public function verEnvios()
