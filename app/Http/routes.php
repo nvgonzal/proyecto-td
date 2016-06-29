@@ -46,18 +46,19 @@ Route::group(['prefix' => 'transportista', 'middleware' => ['tran', 'auth']], fu
     Route::get('mis-vehiculos/', ['as' => 'vehiculos', 'uses' => 'VehiculoController@index']);
     Route::get('mis-vehiculos/create', ['as' => 'vehiculos.create', 'uses' => 'VehiculoController@create']);
     Route::get('mis-vehiculos/{id}', ['as' => 'vehiculos.show', 'uses' => 'VehiculoController@show']);
-
     Route::get('envios',['as'=>'envios','uses'=>'EnvioController@verEnvios']);
 
 });
 
 Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
+    //grupo de rutas de crud de envio
     Route::get('verhistorial',['as'=>'envio.verhistorial','uses'=>'EnvioController@index']);
     Route::get('envio/create/', ['as' => 'envio.create', 'uses' => 'EnvioController@create']);
     Route::post('envio/create/', ['as' => 'envio.store', 'uses' => 'EnvioController@store']);
     Route::get('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@edit']);
     Route::post('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@update']);
     Route::get('envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
+    Route::get('envio/delete/{id}', ['as' => 'envio.delete', 'uses' => 'EnvioController@destroy']);
 });
 
 //Route::get('empresa/{id}',[]);
