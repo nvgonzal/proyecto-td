@@ -14,7 +14,7 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3> Crear nuevo envio</h3>
+                        <h3> Editar envio</h3>
                     </div>
                     <div class="panel-body">
                         {!! Form::open(['
