@@ -20,4 +20,9 @@ class Envio extends Model
     {
         return $this->belongsTo('App\Transportista', 'TRA_ID');
     }
+
+    public function solicitudes()
+    {
+        return $this->belongsToMany('App\Transportistas', 'dbo.solicitudes', 'ENV_ID', 'TRA_ID');
+    }
 }
