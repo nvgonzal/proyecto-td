@@ -29,4 +29,9 @@ class Transportista extends Model
     {
         return $this->hasMany('App\Envio', 'TRA_ID');
     }
+
+    public function solicitudes()
+    {
+        return $this->belongsToMany('App\Envio', 'dbo.solicitudes', 'TRA_ID', 'ENV_ID');
+    }
 }
