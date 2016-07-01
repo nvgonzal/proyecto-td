@@ -134,12 +134,12 @@ class EnvioController extends Controller
         Gmaps::initialize($config);
         $marcadorRecogida = array();
         $marcadorRecogida['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
-        $marcadorRecogida['icon'] = 'http://localhost/proyecto_td/public/img/package-for-delivery.png';
+        $marcadorRecogida['icon'] = URL::asset('img/package-for-delivery.png');
         Gmaps::add_marker($marcadorRecogida);
 
         $marcadorDestino = array();
         $marcadorDestino['position'] = $envio->ENV_COORDENADAS_DESTINO;
-        $marcadorDestino['icon'] = 'http://localhost/proyecto_td/public/img/flag.png';
+        $marcadorDestino['icon'] = URL::asset('img/flag.png');
         Gmaps::add_marker($marcadorDestino);
 
         $map = Gmaps::create_map();
@@ -241,7 +241,7 @@ class EnvioController extends Controller
         foreach ($envios as $envio) {
             $marcador = array();
             $marcador['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
-            $marcador['icon'] = 'http://localhost/proyecto_td/public/img/package-for-delivery.png';
+            $marcador['icon'] = URL::asset('img/package-for-delivery.png');
             $marcador['infowindow_content'] = '<a href="' . URL::to('cliente/envio/' . $envio->ENV_ID)
                 . '">' . $envio->ENV_DESCRIPCION . '</a>';
             Gmaps::add_marker($marcador);
