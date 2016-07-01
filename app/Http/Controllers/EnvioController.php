@@ -49,9 +49,9 @@ class EnvioController extends Controller
             'direccion_recogida' => 'required|max:255',
             'direccion_destino' => 'required|max:255',
             'fecha_limite' => 'required|date',
-            'peso' => 'required|min:0',
-            'volumen' => 'required|min:0',
-            'tipo' => 'required',
+            'peso' => 'required|numeric|min:0.00001',
+            'volumen' => 'required|numeric|min:0.00001',
+            'tipo' => 'required|max:100',
             'tipo_camion' => 'required|min:5|max:50'
         ]);
         $cliente = Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID;
@@ -236,7 +236,6 @@ class EnvioController extends Controller
         $config['zoom'] = '13';
         $config['apiKey'] = $this->apiKey;
         $config['map_height'] = '540px';
-
         Gmaps::initialize($config);
 
         foreach ($envios as $envio) {
