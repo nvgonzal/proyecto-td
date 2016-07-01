@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('direccion_recogida') ? ' has-error' : '' }}">
-                            {!! Form::label('direccion_recogida','Direccion carga',['class'=>'col-md-3','required']) !!}
+                            {!! Form::label('direccion_recogida','Direccion de recogida',['class'=>'col-md-3','required']) !!}
                             <div class="col-md-9">
                                 <input id="direccion_recogida" name="direccion_recogida" class="form-control"
                                        type="text" value="{{$envio->ENV_DIRECCION_RECOGIDA}}">
