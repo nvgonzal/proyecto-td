@@ -132,7 +132,7 @@
 @stop
 
 @section('js')
-    {!! Html::script('http://maps.google.com/maps/api/js?libraries=places&sensor=false') !!}
+    {!! Html::script('http://maps.google.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc') !!}
     {!! Html::script('js/bootstrap-datepicker.min.js') !!}
     {!! Html::script('js/jquery.geocomplete.min.js') !!}
     {!! Html::script('js/js formularios/form envios.js') !!}
