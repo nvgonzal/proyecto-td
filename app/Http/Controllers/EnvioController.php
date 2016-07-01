@@ -157,7 +157,7 @@ class EnvioController extends Controller
     {
         $envio = Envio::find($id);
 
-        return view('envio.edit')->with('envio',$envio)->with('envId',$id);
+        return view('envio.edit')->with('envio',$envio);
     }
 
     /**
@@ -174,8 +174,8 @@ class EnvioController extends Controller
             'direccion_recogida' => 'required|max:255',
             'direccion_destino' => 'required|max:255',
             'fecha_limite' => 'required|date',
-            'peso' => 'required|min:0',
-            'volumen' => 'required|min:0',
+            'peso' => 'required|min:0|numeric',
+            'volumen' => 'required|min:0|numeric',
             'tipo' => 'required',
             'tipo_camion' => 'required|min:5|max:50'
         ]);
@@ -206,7 +206,28 @@ class EnvioController extends Controller
                 $envio->ENV_COORDENADAS_RECOGIDA = $coor;
                 break;
         }
-        return view ('envio.edit')->with($id);
+        $direccion = $request['direccion_destino'];
+        $direccion = str_replace(' ', '+', $direccion);
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+            . $direccion . "&key=AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc";
+        $destino = file_get_contents($url);
+        $objetoDestino = json_decode($destino);
+        switch ($objetoDestino->status) {
+            case 'ZERO_RESULTS':
+                Flash::error("Direccion de destino no dio ningun resultado");
+                return redirect('/cliente/envio/edit/'.$id)->withInput($request->toArray());
+                break;
+            case 'OK':
+                $envio->ENV_DIRECCION_DESTINO= $request['direccion_destino'];
+                $lat = $objetoDestino->results[0]->geometry->location->lat;
+                $lng = $objetoDestino->results[0]->geometry->location->lng;
+                $coor = $lat . ' , ' . $lng;
+                $envio->ENV_COORDENADAS_DESTINO = $coor;
+                break;
+        }
+        $envio->Save();
+        Flash::success("Los datos fueron cambiados");
+        return redirect ('/cliente/verhistorial');
     }
 
     /**

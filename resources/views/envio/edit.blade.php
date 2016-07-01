@@ -18,9 +18,9 @@
                     </div>
                     <div class="panel-body">
                         <p class="requerido"><i>Todos los campo son requeridos</i></p>
-                        {!! Form::open(['
+                        {!! Form::model($envio,['
                         route'=> 'envio.edit',
-                        'method'=>'post',
+                        'method'=>'put',
                         'class'=>'form-horizontal']) !!}
                         <div class="form-group {{ $errors->has('descripcion') ? ' has-error' : '' }}">
                             {!! Form::label('descripcion','Descripcion',['class'=>'col-md-3']) !!}
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('direccion_recogida') ? ' has-error' : '' }}">
-                            {!! Form::label('direccion_recogida','Direccion carga',['class'=>'col-md-3','required']) !!}
+                            {!! Form::label('direccion_recogida','Direccion de recogida',['class'=>'col-md-3','required']) !!}
                             <div class="col-md-9">
                                 <input id="direccion_recogida" name="direccion_recogida" class="form-control"
                                        type="text" value="{{$envio->ENV_DIRECCION_RECOGIDA}}">
