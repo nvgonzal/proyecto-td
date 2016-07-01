@@ -174,8 +174,8 @@ class EnvioController extends Controller
             'direccion_recogida' => 'required|max:255',
             'direccion_destino' => 'required|max:255',
             'fecha_limite' => 'required|date',
-            'peso' => 'required|min:0',
-            'volumen' => 'required|min:0',
+            'peso' => 'required|min:0|numeric',
+            'volumen' => 'required|min:0|numeric',
             'tipo' => 'required',
             'tipo_camion' => 'required|min:5|max:50'
         ]);
