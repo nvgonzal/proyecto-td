@@ -73,7 +73,7 @@
             $('tr').on('click', '#boton-eliminar', function (event) {
                 event.preventDefault();
                 var id = $(this).closest('tr').data('id');
-                var url = 'http://localhost/proyecto_td/public/index.php/cliente/envio/delete/' + id;
+                var url = "<?php echo(URL::to('cliente/envio/delete').'/'); ?>" + id;
                 var botonAceptar = $('<a id="boton-confirmar" class="btn btn-primary btn-sm" data-toggle="tooltip" ' +
                         'title="Confirmar eliminacion" href="' + url + '"> <span class="glyphicon glyphicon-ok" ' +
                         'aria-hidden="true"></span> </a>').tooltip();
