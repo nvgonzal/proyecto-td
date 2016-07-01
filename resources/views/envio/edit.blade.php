@@ -18,9 +18,9 @@
                     </div>
                     <div class="panel-body">
                         <p class="requerido"><i>Todos los campo son requeridos</i></p>
-                        {!! Form::open(['
+                        {!! Form::model($envio,['
                         route'=> 'envio.edit',
-                        'method'=>'post',
+                        'method'=>'put',
                         'class'=>'form-horizontal']) !!}
                         <div class="form-group {{ $errors->has('descripcion') ? ' has-error' : '' }}">
                             {!! Form::label('descripcion','Descripcion',['class'=>'col-md-3']) !!}
