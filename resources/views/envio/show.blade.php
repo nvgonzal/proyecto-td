@@ -83,14 +83,6 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <a data-original-title="Ver" data-toggle="tooltip" type="button"
-                           class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <span class="pull-right">
-                            <a href="#" data-original-title="Editar envio" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Eliminar envio" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
                     </div>
                 </div>
             </div>

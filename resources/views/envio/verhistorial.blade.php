@@ -24,7 +24,7 @@
                                 <th>Eliminar</th>
                                 </thead>
                                 @foreach($envios as $envio)
-                                    <tr>
+                                    <tr data-id="{{$envio->ENV_ID}}">
                                         <td>{{$envio->ENV_DESCRIPCION}}</td>
                                         <td>{{$envio->ENV_DIRECCION_RECOGIDA}}</td>
                                         <td>{{$envio->ENV_DIRECCION_DESTINO}}</td>
@@ -48,9 +48,9 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                               title="Eliminar envio"
-                                               href="{{URL::to('cliente/envio/delete/'.$envio->ENV_ID)}}">
+                                            <a id="boton-eliminar" class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                               title="Eliminar empleado"
+                                               href="#">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </td>
@@ -69,6 +69,19 @@
 
 @section('js')
     <script type="text/javascript">
-        $('[data-toggle="tooltip"]').tooltip();
+        $(function () {
+            $('tr').on('click', '#boton-eliminar', function (event) {
+                event.preventDefault();
+                var id = $(this).closest('tr').data('id');
+                var url = 'http://localhost/proyecto_td/public/index.php/cliente/envio/delete/' + id;
+                var botonAceptar = $('<a id="boton-confirmar" class="btn btn-primary btn-sm" data-toggle="tooltip" ' +
+                        'title="Confirmar eliminacion" href="' + url + '"> <span class="glyphicon glyphicon-ok" ' +
+                        'aria-hidden="true"></span> </a>').tooltip();
+                $(this).closest('td').append(botonAceptar);
+                $(this).tooltip('hide');
+                $(this).remove();
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 @stop
