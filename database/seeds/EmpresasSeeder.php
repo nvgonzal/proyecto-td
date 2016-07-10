@@ -32,7 +32,7 @@ class EmpresasSeeder extends Seeder
 
         $faker = Faker\Factory::create('es_ES');
 
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             DB::table('dbo.EMPRESAS')->insert([
                 'EMP_NOMBRE' => $faker->company,
                 'EMP_DIRECCION' => $faker->address,
