@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Niru</a>
+            <a class="navbar-brand" href="{{URL::to('/')}}">Niru</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,6 +44,8 @@
                                aria-haspopup="true" aria-expanded="false">Ver envios<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{URL::to('transportista/envios')}}">Envios en mi area</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{URL::to('transportista/envios/taken')}}">Solicitudes de envio</a></li>
                             </ul>
                         </li>
                     @endif
