@@ -17,25 +17,19 @@
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
                             <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
                         </ol>
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src="img_chania.jpg" alt="Chania" width="460" height="345">
+                                <img src="{{URL::asset('/img/camion1.jpg')}}" class="img-responsive" alt="camion 1" width="600" height="600">
                             </div>
 
                             <div class="item">
                                 <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
                             </div>
-
                             <div class="item">
                                 <img src="img_flower.jpg" alt="Flower" width="460" height="345">
-                            </div>
-
-                            <div class="item">
-                                <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
                             </div>
                         </div>
 
