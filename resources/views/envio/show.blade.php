@@ -4,9 +4,27 @@
 
 @section('css')
     {!! Html::style('css/tabla.css') !!}
+    {!! Html::style('css/estilos.css') !!}
 @stop
 
 @section('contenido')
+    @if((Auth::user()->CUE_TIPO == 'ambos'
+                        && \App\Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID != $envio->CLI_ID)||
+                         Auth::user()->CUE_TIPO == 'transportista')
+        @if(!$envio->solicitudes->contains('TRA_ID',App\Cuenta::find(Auth::user()->CUE_ID)->transportista->TRA_ID))
+            <a class="btn btn-success btn-lg boton-fixed" data-toggle="tooltip"
+               title="Tomar envio" data-placement="right"
+               href="{{URL::to('transportista/envios/reg/'.$envio->ENV_ID)}}">
+                <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+            </a>
+        @else
+            <a class="btn btn-primary btn-lg boton-fixed" data-toggle="tooltip"
+               title="Cancelar solicitud" data-placement="right"
+               href="{{URL::to('transportista/envios/undo/'.$envio->ENV_ID)}}">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        @endif
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-md-7 col-sm-12">
@@ -81,8 +99,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-footer">
                     </div>
                 </div>
             </div>
