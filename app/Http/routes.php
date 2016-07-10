@@ -46,11 +46,14 @@ Route::group(['prefix' => 'transportista', 'middleware' => ['tran', 'auth']], fu
     Route::get('mis-vehiculos/', ['as' => 'vehiculos', 'uses' => 'VehiculoController@index']);
     Route::get('mis-vehiculos/create', ['as' => 'vehiculos.create', 'uses' => 'VehiculoController@create']);
     Route::get('mis-vehiculos/{id}', ['as' => 'vehiculos.show', 'uses' => 'VehiculoController@show']);
-    Route::get('envios',['as'=>'envios','uses'=>'EnvioController@verEnvios']);
 
+    Route::get('envios', ['as' => 'envios', 'uses' => 'TransportistaController@verEnvios']);
+    Route::get('envios/reg/{id}', ['as' => 'envios.reg', 'uses' => 'TransportistaController@tomarEnvio']);
+    Route::get('envios/taken', ['as' => 'envios.taken', 'uses' => 'TransportistaController@verEnviosTomados']);
+    Route::get('envios/undo/{id}', ['as' => 'envios.undo', 'uses' => 'TransportistaController@cancelarSolicitud']);
 });
 
-Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'cliente', 'middleware' => ['auth', 'cli']], function () {
     //grupo de rutas de crud de envio
     Route::get('verhistorial',['as'=>'envio.verhistorial','uses'=>'EnvioController@index']);
     Route::get('envio/create/', ['as' => 'envio.create', 'uses' => 'EnvioController@create']);
@@ -58,8 +61,11 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['auth']], function () {
     Route::get('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@edit']);
     Route::put('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@update']);
     Route::get('envio/delete/{id}',['as' => 'envio.delete', 'uses' => 'EnvioController@destroy']);
-    Route::get('envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
-    Route::get('envio/delete/{id}', ['as' => 'envio.delete', 'uses' => 'EnvioController@destroy']);
+
+    Route::get('envio/solicitudes/{id}', ['as' => 'envio.solicitudes', 'uses' => 'EnvioController@verSolicitudes']);
+    Route::get('envio/solicitudes/{id}/acep/{tra}', ['as' => 'envio.aceptar', 'uses' => 'EnvioController@aceptarSolicitud']);
 });
+
+Route::get('cliente/envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
 
 //Route::get('empresa/{id}',[]);
