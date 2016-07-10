@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Cuenta;
 use App\Envio;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Gmaps;
 use URL;
@@ -249,26 +248,18 @@ class EnvioController extends Controller
         }
     }
 
-    public function verEnvios()
+    public function verSolicitudes($id)
     {
-        $envios = Envio::where('ENV_ESTADO', true)->get();
-        $config = array();
-        $config['center'] = 'auto';
-        $config['zoom'] = '13';
-        $config['apiKey'] = $this->apiKey;
-        $config['map_height'] = '540px';
-        Gmaps::initialize($config);
+        $envio = Envio::find($id);
+        return view('envio.solicitudes')->with('envio', $envio)->with('id', $id);
+    }
 
-        foreach ($envios as $envio) {
-            $marcador = array();
-            $marcador['position'] = $envio->ENV_COORDENADAS_RECOGIDA;
-            $marcador['icon'] = URL::asset('img/package-for-delivery.png');
-            $marcador['infowindow_content'] = '<a href="' . URL::to('cliente/envio/' . $envio->ENV_ID)
-                . '">' . $envio->ENV_DESCRIPCION . '</a>';
-            Gmaps::add_marker($marcador);
-        }
-        $map = Gmaps::create_map();
-        //dd($map);
-        return view('envio/verEnvios')->with('map', $map);
+    public function aceptarSolicitud($id, $tra)
+    {
+        $envio = Envio::find($id);
+        $envio->TRA_ID = $tra;
+        $envio->save();
+        $envio->solicitudes()->detach();
+        return redirect('cliente/verhistorial');
     }
 }
