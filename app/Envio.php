@@ -23,6 +23,6 @@ class Envio extends Model
 
     public function solicitudes()
     {
-        return $this->belongsToMany('App\Transportistas', 'dbo.solicitudes', 'ENV_ID', 'TRA_ID');
+        return $this->belongsToMany('App\Transportista', 'dbo.solicitudes', 'ENV_ID', 'TRA_ID');
     }
 }
