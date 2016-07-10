@@ -12,11 +12,12 @@ class CreateTableSolicitudes extends Migration
      */
     public function up()
     {
-        Schema::create('solucitudes', function (Blueprint $table) {
+        Schema::create('solicitudes', function (Blueprint $table) {
             $table->integer('TRA_ID')->unsigned();
             $table->integer('ENV_ID')->unsigned();
             $table->foreign('TRA_ID')->references('TRA_ID')->on('TRANSPORTISTAS');
             $table->foreign('ENV_ID')->references('ENV_ID')->on('ENVIOS');
+            $table->primary(['TRA_ID','ENV_ID']);
         });
     }
 
@@ -27,6 +28,6 @@ class CreateTableSolicitudes extends Migration
      */
     public function down()
     {
-        Schema::drop('solucitudes');
+        Schema::drop('solicitudes');
     }
 }
