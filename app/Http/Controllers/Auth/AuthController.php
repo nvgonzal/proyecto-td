@@ -65,7 +65,7 @@ class AuthController extends Controller
             'email'             => 'required|email|max:255|unique:CUENTAS,CUE_EMAIL',
             'password'          => 'required|min:6|confirmed',
             'telefono' => 'required|min:6|max:30',
-            'id_empresa' => 'numeric',
+            'id_empresa' => 'required_unless:tipo,transportista',
         ]);
     }
 
