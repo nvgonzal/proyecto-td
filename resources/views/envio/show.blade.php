@@ -100,6 +100,16 @@
                             </div>
                         </div>
                     </div>
+                    @if(App\Cuenta::find(Auth::user()->CUE_ID)->cliente != null
+                    && App\Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID == $envio->CLI_ID)
+                        <div class="panel-footer">
+                            <a class="btn btn-primary" data-toggle="tooltip"
+                               title="Ver solicitudes"
+                               href="{{URL::to('cliente/envio/solicitudes/'.$envio->ENV_ID)}}">
+                                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
