@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -24,7 +24,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                 @if(Auth::check())
                     @if(Auth::user()->CUE_TIPO == 'ambos' || Auth::user()->CUE_TIPO == 'cliente')
                         <li class="dropdown">
@@ -53,9 +52,23 @@
 
             </ul>
             <!--Busqueda-->
+            <form class="navbar-form navbar-right" method="get" role="form" action="{{URL::to('cuentas')}}">
+                <div class="form-group">
+                    <input type="text" name="nombre" class="form-control" placeholder="Buscar usuario...">
+                </div>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"
+                                                                    aria-hidden="true"></span>
+                </button>
+            </form>
             @if(Auth::check())
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Cuenta</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{Auth::user()->CUE_NOMBRES}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{URL::to('cuenta/info/'.Auth::user()->CUE_ID)}}">Ver mi perfil</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Gestion de cuenta <span class="caret"></span></a>
