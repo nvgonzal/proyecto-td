@@ -15,8 +15,6 @@
                             <table class="table table-hover">
                                 <thead>
                                 <th>Nombre</th>
-                                <th>Apellido paterno</th>
-                                <th>Apellido materno</th>
                                 <th>RUT</th>
                                 <th>Telefono</th>
                                 <th>Email</th>
@@ -25,16 +23,14 @@
                                 </thead>
                                 @foreach($envio->solicitudes as $solicitud)
                                     <tr>
-                                        <td>{{$solicitud->cuenta->CUE_NOMBRES}}</td>
-                                        <td>{{$solicitud->cuenta->CUE_APELL_PATERNO}}</td>
-                                        <td>{{$solicitud->cuenta->CUE_APELL_MATERNO}}</td>
+                                        <td>{{$solicitud->cuenta->CUE_NOMBRE_COMPLETO}}</td>
                                         <td>{{$solicitud->cuenta->CUE_RUT}}</td>
                                         <td>{{$solicitud->cuenta->CUE_TELEFONO}}</td>
                                         <td>{{$solicitud->cuenta->CUE_EMAIL}}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" data-toggle="tooltip"
                                                title="Perfil del transportista"
-                                               href="#">
+                                               href="{{URL::to('cuenta/info/'.$solicitud->cuenta->CUE_ID)}}">
                                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                             </a>
                                         </td>
