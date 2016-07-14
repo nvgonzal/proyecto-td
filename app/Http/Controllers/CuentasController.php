@@ -6,6 +6,7 @@ use App\Cuenta;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use URL;
 use App\Http\Requests;
 use Laracasts\Flash\Flash;
 use App\Cliente;
@@ -14,6 +15,18 @@ use App\Trasportista;
 class CuentasController extends Controller
 {
 
+    public function index(Request $request)
+    {
+        //dd($request);
+        if ($request->has('nombre') && $request['nombre'] == '') {
+            Flash::error('Tienes que ingresar una busqueda!');
+            return redirect(URL::previous());
+        } else {
+            $usuarios = Cuenta::nombre($request['nombre'])->paginate(12);
+            dd($usuarios);
+            return view('cuenta.index')->with('usuarios', $usuarios);
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -22,7 +35,8 @@ class CuentasController extends Controller
      */
     public function show($id)
     {
-
+        $cuenta = Cuenta::find($id);
+        return view('cuenta.show')->with('cuenta', $cuenta);
     }
 
     /**
@@ -72,6 +86,7 @@ class CuentasController extends Controller
         $cuenta->CUE_NOMBRES = $request['nombres'];
         $cuenta->CUE_APELL_PATERNO = $request['apellido_paterno'];
         $cuenta->CUE_APELL_MATERNO = $request['apellido_materno'];
+        $cuenta->CUE_NOMBRE_COMPLETO = $request['nombres'] . ' ' . $request['apellido_paterno'] . ' ' . $request['apellido_materno'];
         $exito=$cuenta->save();
         if($exito)
         {
