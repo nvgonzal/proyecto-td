@@ -49,7 +49,7 @@
                                         </td>
                                         <td>
                                             <a id="boton-eliminar" class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                               title="Eliminar empleado"
+                                               title="Eliminar envio"
                                                href="#">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
