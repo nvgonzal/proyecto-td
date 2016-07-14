@@ -68,4 +68,7 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['auth', 'cli']], function 
 
 Route::get('cliente/envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
 
+Route::get('cuenta/info/{id}', ['as' => 'cuenta.info', 'uses' => 'CuentasController@show']);
+Route::get('cuentas', ['as' => 'cuentas', 'uses' => 'CuentasController@index']);
+
 //Route::get('empresa/{id}',[]);
