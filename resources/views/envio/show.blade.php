@@ -9,8 +9,8 @@
 
 @section('contenido')
     @if((Auth::user()->CUE_TIPO == 'ambos'
-                        && \App\Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID != $envio->CLI_ID)||
-                         Auth::user()->CUE_TIPO == 'transportista')
+                        && \App\Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID != $envio->CLI_ID)
+                        || Auth::user()->CUE_TIPO == 'transportista')
         @if(!$envio->solicitudes->contains('TRA_ID',App\Cuenta::find(Auth::user()->CUE_ID)->transportista->TRA_ID))
             <a class="btn btn-success btn-lg boton-fixed" data-toggle="tooltip"
                title="Tomar envio" data-placement="right"
