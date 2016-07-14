@@ -17,12 +17,17 @@ class CuentasSeeder extends Seeder
     {
         $faker = Faker\Factory::create('es_ES');
 
+        $nombre = $faker->firstName;
+        $apell_paterno = $faker->lastName;
+        $apell_materno = $faker->lastName;
+        $nombre_completo = $nombre . ' ' . $apell_paterno . ' ' . $apell_materno;
         $cuenta1 = Cuenta::create([
             'CUE_EMAIL' => 'foo@foo.com',
             'CUE_PASSWORD' => Hash::make('td12345'),
-            'CUE_NOMBRES' => $faker->firstName,
-            'CUE_APELL_PATERNO' => $faker->lastName,
-            'CUE_APELL_MATERNO' => $faker->lastName,
+            'CUE_NOMBRES' => $nombre,
+            'CUE_APELL_PATERNO' => $apell_paterno,
+            'CUE_APELL_MATERNO' => $apell_materno,
+            'CUE_NOMBRE_COMPLETO' => $nombre_completo,
             'CUE_TELEFONO' => $faker->phoneNumber,
             'CUE_RUT' => '11.111.111-1',
             'CUE_TIPO' => 'ambos',
@@ -39,12 +44,17 @@ class CuentasSeeder extends Seeder
             'TRA_VALORACION' => 0,
         ]);
 
+        $nombre = $faker->firstName;
+        $apell_paterno = $faker->lastName;
+        $apell_materno = $faker->lastName;
+        $nombre_completo = $nombre . ' ' . $apell_paterno . ' ' . $apell_materno;
         $cuenta2 = Cuenta::create([
             'CUE_EMAIL' => 'tra@foo.com',
             'CUE_PASSWORD' => Hash::make('td12345'),
-            'CUE_NOMBRES' => $faker->firstName,
-            'CUE_APELL_PATERNO' => $faker->lastName,
-            'CUE_APELL_MATERNO' => $faker->lastName,
+            'CUE_NOMBRES' => $nombre,
+            'CUE_APELL_PATERNO' => $apell_paterno,
+            'CUE_APELL_MATERNO' => $apell_materno,
+            'CUE_NOMBRE_COMPLETO' => $nombre_completo,
             'CUE_TELEFONO' => $faker->phoneNumber,
             'CUE_RUT' => '22.222.222-2',
             'CUE_TIPO' => 'transportista',
@@ -55,12 +65,17 @@ class CuentasSeeder extends Seeder
             'TRA_VALORACION' => 0,
         ]);
 
+        $nombre = $faker->firstName;
+        $apell_paterno = $faker->lastName;
+        $apell_materno = $faker->lastName;
+        $nombre_completo = $nombre . ' ' . $apell_paterno . ' ' . $apell_materno;
         $cuenta3 = Cuenta::create([
             'CUE_EMAIL' => 'cli@foo.com',
             'CUE_PASSWORD' => Hash::make('td12345'),
-            'CUE_NOMBRES' => $faker->firstName,
-            'CUE_APELL_PATERNO' => $faker->lastName,
-            'CUE_APELL_MATERNO' => $faker->lastName,
+            'CUE_NOMBRES' => $nombre,
+            'CUE_APELL_PATERNO' => $apell_paterno,
+            'CUE_APELL_MATERNO' => $apell_materno,
+            'CUE_NOMBRE_COMPLETO' => $nombre_completo,
             'CUE_TELEFONO' => $faker->phoneNumber,
             'CUE_RUT' => '33.333.333-3',
             'CUE_TIPO' => 'cliente',
