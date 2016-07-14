@@ -37,4 +37,9 @@ class Cuenta extends Authenticatable
         return $this->CUE_EMAIL;
     }
 
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('CUE_NOMBRE_COMPLETO', 'like', "%$nombre%");
+    }
+
 }
