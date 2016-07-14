@@ -82,6 +82,7 @@ class AuthController extends Controller
         $cuenta->setAttribute('CUE_NOMBRES', $data['nombres']);
         $cuenta->setAttribute('CUE_APELL_PATERNO', $data['apellido_paterno']);
         $cuenta->setAttribute('CUE_APELL_MATERNO', $data['apellido_materno']);
+        $cuenta->setAttribute('CUE_NOMBRE_COMPLETO', $data['nombres'] . ' ' . $data['apellido_paterno'] . ' ' . $data['apellido_materno']);
         $cuenta->setAttribute('CUE_RUT', $data['rut']);
         $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
         $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
