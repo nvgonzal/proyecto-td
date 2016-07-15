@@ -17,13 +17,10 @@ class CuentasController extends Controller
 
     public function index(Request $request)
     {
-        //dd($request);
-        if ($request->has('nombre') && $request['nombre'] == '') {
-            Flash::error('Tienes que ingresar una busqueda!');
-            return redirect(URL::previous());
+        if ($request['nombre'] == '') {
+            return view('cuenta.index')->with('usuarios', null);
         } else {
             $usuarios = Cuenta::nombre($request['nombre'])->paginate(12);
-            dd($usuarios);
             return view('cuenta.index')->with('usuarios', $usuarios);
         }
     }
