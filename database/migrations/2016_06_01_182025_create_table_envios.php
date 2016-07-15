@@ -28,7 +28,7 @@ class CreateTableEnvios extends Migration
             $table->integer('ENV_VALORACION_TRA');
             $table->string('ENV_COORDENADAS_RECOGIDA',150);
             $table->string('ENV_COORDENADAS_DESTINO',150);
-            $table->boolean('ENV_ESTADO');
+            $table->string('ENV_ESTADO')->default('Activo');
             $table->foreign('CLI_ID')->references('CLI_ID')->on('CLIENTES');
             $table->foreign('TRA_ID')->references('TRA_ID')->on('TRANSPORTISTAS');
         });
