@@ -25,4 +25,19 @@ class Envio extends Model
     {
         return $this->belongsToMany('App\Transportista', 'dbo.solicitudes', 'ENV_ID', 'TRA_ID');
     }
+
+    public function scopeActivo($query)
+    {
+        return $query->where('ENV_ESTADO', 'Activo');
+    }
+
+    public function scopeAsigando($query)
+    {
+        return $query->where('ENV_ESTADO', 'Asignado');
+    }
+
+    public function scopeFinalizado($query)
+    {
+        return $query->where('ENV_ESTADO', 'Finalizado');
+    }
 }
