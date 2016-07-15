@@ -29,8 +29,7 @@ class EnviosSeeder extends Seeder
                 'ENV_VALORACION_TRA' => 0,
                 'ENV_COORDENADAS_RECOGIDA' => $faker->latitude . ',' . $faker->longitude,
                 'ENV_COORDENADAS_DESTINO' => $faker->latitude . ',' . $faker->longitude,
-                'ENV_ESTADO' => $faker->boolean(70),
-
+                'ENV_ESTADO' => $faker->randomElement(['Activo', 'Finalizado']),
             ]);
         }
     }
