@@ -62,7 +62,6 @@ class EnvioController extends Controller
         $envio->setAttribute('ENV_VOLUMEN', $request['volumen']);
         $envio->setAttribute('ENV_TIPO_CAMION', $request['tipo_camion']);
         $envio->setAttribute('ENV_TIPO', $request['tipo']);
-        $envio->setAttribute('ENV_ESTADO', 'true');
         $envio->setAttribute('ENV_DESCRIPCION', $request['descripcion']);
         $envio->setAttribute('ENV_VALORACION_CLI', 0);
         $envio->setAttribute('ENV_VALORACION_TRA', 0);
