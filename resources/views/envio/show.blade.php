@@ -45,6 +45,13 @@
                                         <td>{{ $envio->ENV_DESCRIPCION }}</td>
                                     </tr>
                                     <tr>
+                                        <td>Cliente</td>
+                                        <td><a href="{{URL::to('cuenta/info/'.$envio->cliente->cuenta->CUE_ID)}}">
+                                                {{$envio->cliente->cuenta->CUE_NOMBRE_COMPLETO}}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>ID</td>
                                         <td>{{ $envio->ENV_ID }}</td>
                                     </tr>
@@ -84,16 +91,23 @@
                                         <td>Volumen</td>
                                         <td>{{ $envio->ENV_VOLUMEN}} </td>
                                     </tr>
-                                    @if($envio->ENV_ESTADO == true)
+                                    @if($envio->ENV_ESTADO == 'Activo')
                                         <tr class="success">
                                             <td>Estado</td>
                                             <td>Activo</td>
                                         </tr>
                                     @else
-                                        <tr class="danger">
+                                        @if($envio->ENV_ESTADO == 'Asignado')
+                                            <tr class="warning">
                                             <td>Estado</td>
-                                            <td>Finalizado</td>
+                                                <td>Asignado</td>
                                         </tr>
+                                        @else
+                                            <tr class="danger">
+                                                <td>Estado</td>
+                                                <td>Finalizado</td>
+                                            </tr>
+                                        @endif
                                     @endif
                                     </tbody>
                                 </table>
@@ -107,6 +121,11 @@
                                title="Ver solicitudes"
                                href="{{URL::to('cliente/envio/solicitudes/'.$envio->ENV_ID)}}">
                                 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            </a>
+                            <a class="btn btn-warning" data-toggle="tooltip"
+                               title="Editar informacion"
+                               href="{{URL::to('cliente/envio/edit/'.$envio->ENV_ID)}}">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
                         </div>
                     @endif
