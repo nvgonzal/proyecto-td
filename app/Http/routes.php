@@ -58,12 +58,26 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['auth', 'cli']], function 
     Route::get('verhistorial',['as'=>'envio.verhistorial','uses'=>'EnvioController@index']);
     Route::get('envio/create/', ['as' => 'envio.create', 'uses' => 'EnvioController@create']);
     Route::post('envio/create/', ['as' => 'envio.store', 'uses' => 'EnvioController@store']);
-    Route::get('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@edit']);
-    Route::put('envio/edit/{id}',['as' => 'envio.edit', 'uses' => 'EnvioController@update']);
-    Route::get('envio/delete/{id}',['as' => 'envio.delete', 'uses' => 'EnvioController@destroy']);
+    Route::get('envio/edit/{id}', ['as' => 'envio.edit', 'uses' => 'EnvioController@edit', 'middleware' => 'envi']);
+    Route::put('envio/edit/{id}', ['as' => 'envio.edit', 'uses' => 'EnvioController@update', 'middleware' => 'envi']);
+    Route::get('envio/delete/{id}', ['as' => 'envio.delete', 'uses' => 'EnvioController@destroy', 'middleware' => 'envi']);
 
-    Route::get('envio/solicitudes/{id}', ['as' => 'envio.solicitudes', 'uses' => 'EnvioController@verSolicitudes']);
-    Route::get('envio/solicitudes/{id}/acep/{tra}', ['as' => 'envio.aceptar', 'uses' => 'EnvioController@aceptarSolicitud']);
+    Route::get('verhistorial/asignados', ['as' => 'envio.asignados', 'uses' => 'EnvioController@enviosAsignados']);
+    Route::get('verhistorial/activos', ['as' => 'envio.activos', 'uses' => 'EnvioController@enviosActivos']);
+    Route::get('verhistorial/finalizados', ['as' => 'envio.fin', 'uses' => 'EnvioController@enviosFinalizados']);
+
+    Route::get('envio/solicitudes/{id}',
+        ['as' => 'envio.solicitudes',
+            'uses' => 'EnvioController@verSolicitudes',
+            'middleware' => 'envi']);
+
+    Route::get('envio/solicitudes/{id}/acep/{tra}',
+        ['as' => 'envio.aceptar',
+            'uses' => 'EnvioController@aceptarSolicitud',
+            'middleware' => 'envi']);
+
+    Route::get('envio/finalizar/{id}', ['as' => 'envio.finalizar', 'uses' => 'EnvioController@finalizarEnvio',
+        'middleware' => 'envi']);
 });
 
 Route::get('cliente/envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioController@show']);
@@ -71,4 +85,4 @@ Route::get('cliente/envio/{id}', ['as' => 'envio.show', 'uses' => 'EnvioControll
 Route::get('cuenta/info/{id}', ['as' => 'cuenta.info', 'uses' => 'CuentasController@show']);
 Route::get('cuentas', ['as' => 'cuentas', 'uses' => 'CuentasController@index']);
 
-//Route::get('empresa/{id}',[]);
+Route::get('empresa/{id}', ['as' => 'empresa.show', 'uses' => 'EmpresaController@show']);
