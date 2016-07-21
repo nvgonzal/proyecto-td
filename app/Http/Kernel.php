@@ -51,5 +51,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'tran' => \App\Http\Middleware\TransportistaMiddleware::class,
         'cli' => \App\Http\Middleware\ClienteMiddleware::class,
+        'envi' => \App\Http\Middleware\CRUDEnvioMiddleware::class,
     ];
 }
