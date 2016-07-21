@@ -30,8 +30,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Gestion envios<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Ver envios activos</a></li>
-                                <li><a href="{{URL::to('/cliente/verhistorial')}}">Ver Historial de envios</a></li>
+                                <li><a href="{{URL::to('cliente/verhistorial/activos')}}">Ver envios activos</a></li>
+                                <li><a href="{{URL::to('cliente/verhistorial/asignados')}}">Ver envios asignados</a>
+                                </li>
+                                <li><a href="{{URL::to('cliente/verhistorial/finalizados')}}">Ver envios finalizados</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{URL::to('/cliente/verhistorial')}}">Ver historial de envios</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{URL::to('cliente/envio/create')}}">Creacion de envios</a></li>
                             </ul>
