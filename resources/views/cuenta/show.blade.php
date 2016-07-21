@@ -81,7 +81,10 @@
                                 @if($cuenta->cliente->empresa != null)
                                     <tr>
                                         <td>Empresa</td>
-                                        <td>{{$cuenta->cliente->empresa->EMP_NOMBRE}}</td>
+                                        <td><a href="{{URL::to('empresa/'.$cuenta->cliente->empresa->EMP_ID)}}">
+                                                {{$cuenta->cliente->empresa->EMP_NOMBRE}}
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endif
                             @endif
@@ -96,11 +99,10 @@
                     </div>
                 </div>
             </div>
-
-            @if($cuenta->CUE_ID == Auth::user()->CUE_ID)
+            @if(Auth::check() && $cuenta->CUE_ID == Auth::user()->CUE_ID)
                 <div class="panel-footer">
                     <div class="">
-                        <a href="#" data-original-title="Editar mi perfil" data-toggle="tooltip"
+                        <a href="{{URL::to('edit')}}" data-original-title="Editar mi perfil" data-toggle="tooltip"
                            type="button"
                            class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span>
                         </a>
