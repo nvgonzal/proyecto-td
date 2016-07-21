@@ -10,8 +10,8 @@ $(function () {
     direccionDestino.geocomplete();
 
     $('.datepicker').datepicker({
-        format: "dd/mm/yyyy",
-        todayBtn: true,
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
         language: "es",
         todayHighlight: true
     });
