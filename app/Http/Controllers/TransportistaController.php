@@ -17,7 +17,7 @@ class TransportistaController extends Controller
 
     public function verEnvios()
     {
-        $envios = Envio::where('ENV_ESTADO', true)->get();
+        $envios = Envio::activo()->get();
         $config = array();
         $config['center'] = 'auto';
         $config['zoom'] = '13';
