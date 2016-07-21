@@ -28,11 +28,7 @@
                                         <td>{{$envio->ENV_DESCRIPCION}}</td>
                                         <td>{{$envio->ENV_DIRECCION_RECOGIDA}}</td>
                                         <td>{{$envio->ENV_DIRECCION_DESTINO}}</td>
-                                        @if($envio->ENV_ESTADO)
-                                            <td>Activo</td>
-                                        @else
-                                            <td>Finalizado</td>
-                                        @endif
+                                        <td>{{$envio->ENV_ESTADO}}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" data-toggle="tooltip"
                                                title="Informacion detallada"
