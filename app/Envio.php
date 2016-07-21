@@ -11,6 +11,8 @@ class Envio extends Model
 
     public $timestamps = false;
 
+    protected $dates = ['ENV_FECHA_LIMITE'];
+
     public function cliente()
     {
         return $this->belongsTo('App\Cliente', 'CLI_ID');
@@ -31,7 +33,7 @@ class Envio extends Model
         return $query->where('ENV_ESTADO', 'Activo');
     }
 
-    public function scopeAsigando($query)
+    public function scopeAsignado($query)
     {
         return $query->where('ENV_ESTADO', 'Asignado');
     }
