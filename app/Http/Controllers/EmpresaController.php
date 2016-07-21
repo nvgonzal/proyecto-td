@@ -49,7 +49,7 @@ class EmpresaController extends Controller
     public function show($id)
     {
         $empresa = Empresa::find($id);
-        return view('empresa')->with('empresa', $empresa);
+        return view('empresa.show')->with('empresa', $empresa);
     }
 
     /**
