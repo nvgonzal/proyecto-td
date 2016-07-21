@@ -19,10 +19,10 @@
                                 <th>Telefono</th>
                                 <th>Email</th>
                                 <th>Perfil</th>
-                                <th>Aceptar</th>
+                                <th>Asignar</th>
                                 </thead>
                                 @foreach($envio->solicitudes as $solicitud)
-                                    <tr>
+                                    <tr data-tra="{{$solicitud->TRA_ID}}">
                                         <td>{{$solicitud->cuenta->CUE_NOMBRE_COMPLETO}}</td>
                                         <td>{{$solicitud->cuenta->CUE_RUT}}</td>
                                         <td>{{$solicitud->cuenta->CUE_TELEFONO}}</td>
@@ -36,9 +36,9 @@
                                         </td>
                                         <td>
                                             <a id="boton-aceptar" class="btn btn-success btn-sm" data-toggle="tooltip"
-                                               title="Acpetar solicitud"
-                                               href="{{URL::to('cliente/envio/solicitudes/'.$id.'/acep/'.$solicitud->TRA_ID)}}">
-                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                               title="Asignar envio"
+                                               href="#">
+                                                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                                             </a>
                                         </td>
                                     </tr>
@@ -51,4 +51,23 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    {{Html::script('js/tabla')}}
+    <script type="text/javascript">
+        $(function () {
+            $('tr').on('click', '#boton-aceptar', function (event) {
+                event.preventDefault();
+                var id = $(this).closest('tr').data('tra');
+                var url = "{{URL::to('cliente/envio/solicitudes/'.$id.'/acep/')}}" + "/" + id;
+                var botonAceptar = $('<a id="boton-confirmar" class="btn btn-primary btn-sm" data-toggle="tooltip" ' +
+                        'title="Confirmar asignacion" href="' + url + '"> <span class="glyphicon glyphicon-ok" ' +
+                        'aria-hidden="true"></span> </a>').tooltip();
+                $(this).closest('td').append(botonAceptar);
+                $(this).tooltip('hide');
+                $(this).remove();
+            });
+        });
+    </script>
 @stop
