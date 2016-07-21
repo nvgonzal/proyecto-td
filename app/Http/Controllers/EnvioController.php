@@ -47,7 +47,7 @@ class EnvioController extends Controller
             'descripcion' => 'required',
             'direccion_recogida' => 'required|max:255',
             'direccion_destino' => 'required|max:255',
-            'fecha_limite' => 'required|date',
+            'fecha_limite' => 'required|date_format:d-m-Y',
             'peso' => 'required|numeric|min:0.00001',
             'volumen' => 'required|numeric|min:0.00001',
             'tipo' => 'required|max:100',
@@ -58,7 +58,9 @@ class EnvioController extends Controller
         $envio->setAttribute('TRA_ID', null);
         $envio->setAttribute('CLI_ID', $cliente);
         $envio->setAttribute('ENV_PESO_CARGA', $request['peso']);
-        $envio->setAttribute('ENV_FECHA_LIMITE', $request['fecha_limite']);
+        $flimite = \DateTime::createFromFormat('d-m-Y', $request['fecha_limite']);
+        $flimite->format('Y-m-d');
+        $envio->setAttribute('ENV_FECHA_LIMITE', $flimite);
         $envio->setAttribute('ENV_VOLUMEN', $request['volumen']);
         $envio->setAttribute('ENV_TIPO_CAMION', $request['tipo_camion']);
         $envio->setAttribute('ENV_TIPO', $request['tipo']);
@@ -107,7 +109,7 @@ class EnvioController extends Controller
         $exito = $envio->save();
         if ($exito) {
             Flash::success('Envio ingresado con exito');
-            return $this->show($envio->ENV_ID);
+            return redirect('cliente/envio/' . $envio->ENV_ID)->with('envio', $envio);
         } else {
             Flash::error('No pudo ingresar envio');
             return redirect('/cliente/envio/create');
@@ -171,7 +173,7 @@ class EnvioController extends Controller
             'descripcion' => 'required',
             'direccion_recogida' => 'required|max:255',
             'direccion_destino' => 'required|max:255',
-            'fecha_limite' => 'required|date',
+            'fecha_limite' => 'required',
             'peso' => 'required|min:0|numeric',
             'volumen' => 'required|min:0|numeric',
             'tipo' => 'required',
@@ -180,7 +182,9 @@ class EnvioController extends Controller
         $cliente = Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID;
         $envio = Envio::find($id);
         $envio->ENV_PESO_CARGA = $request['peso'];
-        $envio->ENV_FECHA_LIMITE= $request['fecha_limite'];
+        $flimite = \DateTime::createFromFormat('d-m-Y', $request['fecha_limite']);
+        $flimite->format('Y-m-d');
+        $envio->ENV_FECHA_LIMITE = $flimite;
         $envio->ENV_VOLUMEN= $request['volumen'];
         $envio->ENV_TIPO_CAMION= $request['tipo_camion'];
         $envio->ENV_TIPO= $request['tipo'];
@@ -257,8 +261,38 @@ class EnvioController extends Controller
     {
         $envio = Envio::find($id);
         $envio->TRA_ID = $tra;
+        $envio->ENV_ESTADO = 'Asignado';
         $envio->save();
         $envio->solicitudes()->detach();
         return redirect('cliente/verhistorial');
+    }
+
+    public function enviosAsignados()
+    {
+        $envios = Envio::asignado()->where('CLI_ID', Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID)
+            ->paginate(10);
+        return view('envio.asignados')->with('envios', $envios);
+    }
+
+    public function enviosFinalizados()
+    {
+        $envios = Envio::finalizado()->where('CLI_ID', Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID)
+            ->paginate(10);
+        return view('envio.finalizados')->with('envios', $envios);
+    }
+
+    public function enviosActivos()
+    {
+        $envios = Envio::activo()->where('CLI_ID', Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID)
+            ->paginate(10);
+        return view('envio.verhistorial')->with('envios', $envios);
+    }
+
+    public function finalizarEnvio($id)
+    {
+        $envio = Envio::find($id);
+        $envio->ENV_ESTADO = 'Finalizado';
+        $envio->save();
+        return redirect('/cliente/verhistorial/finalizados');
     }
 }
