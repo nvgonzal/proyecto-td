@@ -10,7 +10,7 @@
 @section('contenido')
     @if((Auth::user()->CUE_TIPO == 'ambos'
                         && \App\Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID != $envio->CLI_ID)
-                        || Auth::user()->CUE_TIPO == 'transportista')
+                        || Auth::user()->CUE_TIPO == 'transportista' && $envio->ENV_ESTADO == 'Activo')
         @if(!$envio->solicitudes->contains('TRA_ID',App\Cuenta::find(Auth::user()->CUE_ID)->transportista->TRA_ID))
             <a class="btn btn-success btn-lg boton-fixed" data-toggle="tooltip"
                title="Tomar envio" data-placement="right"
@@ -69,7 +69,11 @@
                                     </tr>
                                     <tr>
                                         <td>Fecha limite</td>
-                                        <td>{{ $envio->ENV_FECHA_LIMITE }}</td>
+                                        <td>{{ $envio->ENV_FECHA_LIMITE->format('j F Y') }}
+                                            <i class="fa fa-calendar">
+                                                {{$envio->ENV_FECHA_LIMITE->diffForHumans()}}
+                                            </i>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Direccion destino</td>
@@ -122,11 +126,13 @@
                                href="{{URL::to('cliente/envio/solicitudes/'.$envio->ENV_ID)}}">
                                 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                             </a>
+                            @if($envio->ENV_ESTADO == 'Activo')
                             <a class="btn btn-warning" data-toggle="tooltip"
                                title="Editar informacion"
                                href="{{URL::to('cliente/envio/edit/'.$envio->ENV_ID)}}">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
+                            @endif
                         </div>
                     @endif
                 </div>
