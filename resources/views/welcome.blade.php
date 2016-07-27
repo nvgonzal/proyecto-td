@@ -21,15 +21,15 @@
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="{{URL::asset('/img/camion1.jpg')}}" class="img-responsive" alt="camion 1" width="600" height="600">
+                            <div class="item active" align="center">
+                                <img src="{{URL::asset('/img/camion1.jpg')}}" class="img-responsive" alt="camion 1" width="800" height="600">
                             </div>
 
-                            <div class="item">
-                                <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
+                            <div class="item" align="center">
+                                <img src="{{URL::asset('/img/camion2.jpg')}}" alt="Camion 2" width="800" height="600">
                             </div>
-                            <div class="item">
-                                <img src="img_flower.jpg" alt="Flower" width="460" height="345">
+                            <div class="item" align="center">
+                                <img src="{{URL::asset('/img/camion3.jpg')}}" alt="Flower" width="800" height="600">
                             </div>
                         </div>
 
