@@ -37,7 +37,7 @@
                                         <td>
                                             <a id="boton-finalizar" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                title="Evaluar"
-                                               href="#">
+                                               href="{{URL::to('cliente/envio/'.$envio->ENV_ID.'/rate')}}">
                                                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                             </a>
                                         </td>
