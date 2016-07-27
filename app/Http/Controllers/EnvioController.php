@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use App\Cuenta;
 use App\Envio;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Gmaps;
 use URL;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
+use Carbon\Carbon;
+use DB;
 
 class EnvioController extends Controller
 {
     private $apiKey = 'AIzaSyD8hh18OThd8mkDRnSttJMoM28hU_40Jzc';
+
+    public function __construct()
+    {
+        Carbon::setLocale('es');
+    }
 
     /**
      * Display a listing of the resource.
@@ -294,5 +300,24 @@ class EnvioController extends Controller
         $envio->ENV_ESTADO = 'Finalizado';
         $envio->save();
         return redirect('/cliente/verhistorial/finalizados');
+    }
+
+    public function evaluar($id)
+    {
+        $envio = Envio::find($id);
+        return view('envio.evaluarTra')->with('envio', $envio);
+    }
+
+    public function registrarEvaluacion(Request $request, $id)
+    {
+        $this->validate($request, [
+            'evaluacion' => 'required|numeric|between:1,5'
+        ]);
+        $envio = Envio::find($id);
+        $envio->ENV_VALORACION_TRA = $request['evaluacion'];
+        $envio->save();
+        DB::statement('exec SP_RECALCULAR_VALORACION_DEL_TRANSPORTISTA ?', [$envio->TRA_ID]);
+        Flash::success('Evaluacion registrada');
+        return redirect('cliente/envio/' . $envio->ENV_ID);
     }
 }
