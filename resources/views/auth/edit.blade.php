@@ -5,7 +5,7 @@
 @section('contenido')
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Editar Informacion</h3>
@@ -24,58 +24,58 @@
 
                                         <div class="panel-body">
                                             <fieldset>
-                                            {!!
-                                            Form::model($infoCuenta,['class'=>'form-horizontal','route'=>'auth.edit.per','method'=>'put'])
-                                            !!}
-                                            <div class="form-group {{ $errors->has('rut') ? ' has-error' : '' }}">
-                                                {!! Form::label('rut','RUT',['class'=>'col-md-3']) !!}
-                                                <div class="col-md-9">
-                                                    {!! Form::text('rut',null,['class'=>'form-control']) !!}
-                                                    @if ($errors->has('rut'))
-                                                        <span class="help-block">
+                                                {!!
+                                                Form::model($infoCuenta,['class'=>'form-horizontal','route'=>'auth.edit.per','method'=>'put'])
+                                                !!}
+                                                <div class="form-group {{ $errors->has('rut') ? ' has-error' : '' }}">
+                                                    {!! Form::label('rut','RUT',['class'=>'col-md-3']) !!}
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('rut',null,['class'=>'form-control']) !!}
+                                                        @if ($errors->has('rut'))
+                                                            <span class="help-block">
                                             <strong>{{ $errors->first('rut') }}</strong>
                                         </span>
-                                                    @endif
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group {{ $errors->has('nombres') ? ' has-error' : '' }}">
-                                                {!! Form::label('nombres','Nombres',['class'=>'col-md-3']) !!}
-                                                <div class="col-md-9">
-                                                    {!! Form::text('nombres',null,['class'=>'form-control']) !!}
-                                                    @if ($errors->has('nombres'))
-                                                        <span class="help-block">
+                                                <div class="form-group {{ $errors->has('nombres') ? ' has-error' : '' }}">
+                                                    {!! Form::label('nombres','Nombres',['class'=>'col-md-3']) !!}
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('nombres',null,['class'=>'form-control']) !!}
+                                                        @if ($errors->has('nombres'))
+                                                            <span class="help-block">
                                             <strong>{{ $errors->first('nombres') }}</strong>
                                         </span>
-                                                    @endif
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div
-                                                    class="form-group {{ $errors->has('apellido_paterno') ? ' has-error' : '' }}">
-                                                {!! Form::label('apellido_paterno','Apellido Paterno',['class'=>'col-md-3'])
-                                                !!}
-                                                <div class="col-md-9">
-                                                    {!! Form::text('apellido_paterno',null,['class'=>'form-control']) !!}
-                                                    @if ($errors->has('apellido_paterno'))
-                                                        <span class="help-block">
+                                                <div
+                                                        class="form-group {{ $errors->has('apellido_paterno') ? ' has-error' : '' }}">
+                                                    {!! Form::label('apellido_paterno','Apellido Paterno',['class'=>'col-md-3'])
+                                                    !!}
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('apellido_paterno',null,['class'=>'form-control']) !!}
+                                                        @if ($errors->has('apellido_paterno'))
+                                                            <span class="help-block">
                                         <strong>{{ $errors->first('apellido_paterno') }}</strong>
                                         </span>
-                                                    @endif
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div
-                                                    class="form-group {{ $errors->has('apellido_materno') ? ' has-error' : '' }}">
-                                                {!! Form::label('apellido_materno','Apellido
-                                                Materno',['class'=>'col-md-3'])!!}
-                                                <div class="col-md-9">
-                                                    {!! Form::text('apellido_materno',null,['class'=>'form-control']) !!}
-                                                    @if ($errors->has('apellido_materno'))
-                                                        <span class="help-block">
+                                                <div
+                                                        class="form-group {{ $errors->has('apellido_materno') ? ' has-error' : '' }}">
+                                                    {!! Form::label('apellido_materno','Apellido
+                                                    Materno',['class'=>'col-md-3'])!!}
+                                                    <div class="col-md-9">
+                                                        {!! Form::text('apellido_materno',null,['class'=>'form-control']) !!}
+                                                        @if ($errors->has('apellido_materno'))
+                                                            <span class="help-block">
                                             <strong>{{ $errors->first('apellido_materno') }}</strong>
                                         </span>
-                                                    @endif
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
                                         <div class="panel-footer">
                                             {!! Form::submit('Guardar cambios',['class'=>'btn btn-success btn-lg
@@ -208,6 +208,35 @@
                                                 <button class="btn btn-primary btn-block">Borrar cuenta</button>
                                             </a>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                                                Actualizar foto de perfil</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse5" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            {!! Form::open(['route'=>'auth.edit.img','method'=>'put','files'=>true]) !!}
+                                            <div class="form-group {{ $errors->has('foto') ? ' has-error' : '' }}">
+                                                {!! Form::label('foto','Foto de perfil',['class'=>'col-md-3']) !!}
+                                                <div class="col-md-9">
+                                                    {!! Form::file('foto') !!}
+                                                    @if ($errors->has('foto'))
+                                                        <span class="help-block">
+                                        <strong>{{ $errors->first('foto') }}</strong>
+                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            {!! Form::submit('Guardar cambios',['class'=>'btn btn-success btn-lg
+                                            btn-block']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>

@@ -17,7 +17,7 @@
                     </div>
                     <div class="panel-body">
                         <fieldset>
-                            {!! Form::open(['class'=>'form-horizontal','route'=>'auth.register']) !!}
+                            {!! Form::open(['class'=>'form-horizontal','route'=>'auth.register','files'=>true]) !!}
                             <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                 {!! Form::label('email','Correo electronico',['class'=>'col-md-3']) !!}
                                 <div class="col-md-9">
@@ -50,6 +50,9 @@
                                     </span>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
                             </div>
                             <div class="form-group {{ $errors->has('rut') ? ' has-error' : '' }}">
                                 {!! Form::label('rut','RUT',['class'=>'col-md-3']) !!}
@@ -106,11 +109,25 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group {{ $errors->has('foto') ? ' has-error' : '' }}">
+                                {!! Form::label('foto','Foto de perfil',['class'=>'col-md-3']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::file('foto') !!}
+                                    @if ($errors->has('foto'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('foto') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
                             <div id='tipo' class="form-group {{ $errors->has('tipo') ? ' has-error' : '' }}">
                                 <label class="col-md-3">Tipo de cuenta</label>
 
                                 <label class="radio-inline">
-                                    {!! Form::radio('tipo','transportista') !!} Trasportista.
+                                    {!! Form::radio('tipo','transportista',true) !!} Trasportista.
                                 </label>
                                 <label class="radio-inline">
                                     {!! Form::radio('tipo','cliente',['id'=>'cliente']) !!} Cliente.
