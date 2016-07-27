@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('CUE_TIPO',15);
             $table->string('CUE_TELEFONO', 40);
             $table->string('CUE_NOMBRE_COMPLETO');
+            $table->string('CUE_FOTO_PERFIL')->nullable();
             $table->rememberToken();
         });
     }
