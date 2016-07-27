@@ -9,7 +9,8 @@ use App\Cuenta;
 use Exception;
 use URL;
 use Auth;
-use App\Http\Requests;
+use Illuminate\Http\Request;
+use DB;
 
 class TransportistaController extends Controller
 {
@@ -67,5 +68,24 @@ class TransportistaController extends Controller
         $envios = $tra->solicitudes;
         //dd($envios);
         return view('envio.enviosTomados')->with('envios', $envios);
+    }
+
+    public function evaluar($id)
+    {
+        $envio = Envio::find($id);
+        return view('envio.evaluarCli')->with('envio', $envio);
+    }
+
+    public function registrarEvaluacion(Request $request, $id)
+    {
+        $this->validate($request, [
+            'evaluacion' => 'required|numeric|between:1,5'
+        ]);
+        $envio = Envio::find($id);
+        $envio->ENV_VALORACION_CLI = $request['evaluacion'];
+        $envio->save();
+        DB::statement('exec SP_RECALCULAR_VALORACION_DEL_CLIENTE ?', [$envio->CLI_ID]);
+        Flash::success('Evaluacion registrada');
+        return redirect('cliente/envio/' . $envio->ENV_ID);
     }
 }
