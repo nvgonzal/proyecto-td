@@ -52,5 +52,10 @@ class Kernel extends HttpKernel
         'tran' => \App\Http\Middleware\TransportistaMiddleware::class,
         'cli' => \App\Http\Middleware\ClienteMiddleware::class,
         'envi' => \App\Http\Middleware\CRUDEnvioMiddleware::class,
+        'rateable' => \App\Http\Middleware\RestringirEvaluacion::class,
+        'editable' => \App\Http\Middleware\Editable::class,
+        'deletable' => \App\Http\Middleware\Deletable::class,
+        'traev' => \App\Http\Middleware\TraEvaluable::class,
+        'takable' => \App\Http\Middleware\Takable::class,
     ];
 }
