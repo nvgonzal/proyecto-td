@@ -68,7 +68,7 @@ Route::group(['prefix' => 'transportista', 'middleware' => ['auth', 'tran']], fu
         'middleware' => ['rateable', 'traev'],
     ]);
 
-    Route::get('envios/fin', ['as' => 'envios.fin']);
+    Route::get('envios/fin', ['as' => 'envios.fin', 'uses' => 'TransportistaController@enviosFinalizados']);
 });
 
 Route::group(['prefix' => 'cliente', 'middleware' => ['auth', 'cli']], function () {
