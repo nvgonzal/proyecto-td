@@ -15,9 +15,12 @@
                         ¡La pagina solicitada no se encontro!
                     </div>
                     <div class="error-actions">
-                        <a href="{{URL::to('home')}}" class="btn btn-primary"><span
+                        <a href="{{URL::to('/')}}" class="btn btn-primary"><span
                                     class="glyphicon glyphicon-home"></span>
                             Volver a inicio </a>
+                        <a href="{{URL::previous()}}" class="btn btn-primary"><span
+                                    class="glyphicon glyphicon-arrow-left"></span>
+                            Volver atras </a>
                     </div>
                 </div>
             </div>
