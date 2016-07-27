@@ -7,10 +7,12 @@ use App\Envio;
 use Flash;
 use App\Cuenta;
 use Exception;
+use Mail;
 use URL;
 use Auth;
 use Illuminate\Http\Request;
 use DB;
+use App\Cliente;
 
 class TransportistaController extends Controller
 {
@@ -41,11 +43,23 @@ class TransportistaController extends Controller
 
     public function tomarEnvio($id)
     {
+        
         try {
             $envio = Envio::find($id);
             $tra = Cuenta::find(Auth::user()->CUE_ID)->transportista;
             $envio->solicitudes()->attach($tra->TRA_ID);
             Flash::success('Envio tomado.');
+            $info = [
+                'Nombre' => Auth::user()->CUE_NOMBRE_COMPLETO,
+                'Correo' => Auth::user()->CUE_EMAIL,
+                'Telefono' => Auth::user()->CUE_TELEFONO,
+                'Id_Envio' => $id,
+                'Id_Tra' => Auth::user()->CUE_ID
+            ];
+            Mail::send('email.viewTransportistaToCliente',$info,function ($msj) use ($id){
+                $msj->subject('Han tomado uno de tus envios');
+                $msj->to(Cuenta::find(Cliente::find(Envio::find($id)->CLI_ID)->CUE_ID)->CUE_EMAIL);
+            });
             return redirect(URL::previous());
         } catch (Exception $e) {
             Flash::error('Ya has tomado este envio!');
