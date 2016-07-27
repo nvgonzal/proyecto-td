@@ -198,4 +198,24 @@ class CuentasController extends Controller
         return redirect('edit')->with('infoCuenta',$this->infoCuenta());
     }
 
+    public function editImagen(Request $request)
+    {
+        $this->validate($request, [
+            'foto' => 'image|dimensions:max_width=750,max_height=750'
+        ]);
+        $cuenta = Cuenta::find(Auth::user()->CUE_ID);
+        if ($request->file('foto') != null) {
+            $foto = $request->file('foto');
+            $nombre = 'niru_' . md5(time()) . '.' . $foto->getClientOriginalExtension();
+            $ruta = public_path() . '\img\pp';
+            $foto->move($ruta, $nombre);
+            $cuenta->CUE_FOTO_PERFIL = $nombre;
+        } else {
+            $cuenta->CUE_FOTO_PERFIL = null;
+        }
+        $cuenta->save();
+        Flash::success('Foto actualizada');
+        return redirect('edit')->with('infoCuenta', $this->infoCuenta());
+    }
+
 }
