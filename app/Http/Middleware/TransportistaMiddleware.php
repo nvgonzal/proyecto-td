@@ -17,7 +17,7 @@ class TransportistaMiddleware
     public function handle($request, Closure $next)
     {
         if (!Auth::check() || Auth::user()->CUE_TIPO == 'cliente') {
-            return redirect('/');
+            abort(403);
         }
         return $next($request);
     }

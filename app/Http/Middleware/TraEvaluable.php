@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Cuenta;
 use App\Envio;
-use Auth;
-use URL;
+use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class CRUDEnvioMiddleware
+class TraEvaluable
 {
     /**
      * Handle an incoming request.
@@ -19,7 +18,7 @@ class CRUDEnvioMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Cuenta::find(Auth::user()->CUE_ID)->cliente->CLI_ID != Envio::find($request->id)->CLI_ID) {
+        if (Envio::find($request->id)->TRA_ID != Cuenta::find(Auth::user()->CUE_ID)->transportista->TRA_ID) {
             abort(403);
         }
         return $next($request);
