@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Cuenta;
 use App\Envio;
+use App\Transportista;
 use Illuminate\Http\Request;
 use Gmaps;
 use URL;
+use Mail;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
@@ -270,6 +272,18 @@ class EnvioController extends Controller
         $envio->ENV_ESTADO = 'Asignado';
         $envio->save();
         $envio->solicitudes()->detach();
+        $info = [
+            'Nombre' => Auth::user()->CUE_NOMBRE_COMPLETO,
+            'Correo' => Auth::user()->CUE_EMAIL,
+            'Telefono' => Auth::user()->CUE_TELEFONO,
+            'Id_Envio' => $id,
+            'Id_Cli' => Auth::user()->CUE_ID
+        ];
+        Mail::send('email.viewClienteToTransportista',$info,function ($msj) use ($tra){
+            $msj->subject('Te han asignado a un envio');
+            #$msj->to('juanprueblas@gmail.com');
+            $msj->to(Cuenta::find(Transportista::find($tra)->CUE_ID)->CUE_EMAIL);
+        });
         return redirect('cliente/verhistorial');
     }
 
