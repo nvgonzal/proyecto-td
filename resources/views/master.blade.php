@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield('titulo') | Niru System</title>
     {!! Html::style('css/bootstrap.css') !!}
+    {!! Html::style('css/font-awesome.css') !!}
     @yield('css')
 </head>
 <body>
@@ -50,6 +51,7 @@
                                 <li><a href="{{URL::to('transportista/envios')}}">Envios en mi area</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{URL::to('transportista/envios/taken')}}">Solicitudes de envio</a></li>
+                                <li><a href="{{URL::to('transportista/envios/fin')}}">Envios finalizados</a></li>
                             </ul>
                         </li>
                     @endif
