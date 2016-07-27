@@ -1,6 +1,6 @@
 @extends('error')
 
-@section('titulo','403 | No autorizado')
+@section('titulo','401 | No autorizado')
 
 @section('contenido')
     <div class="container">
@@ -10,7 +10,7 @@
                     <h1>
                         Oops!</h1>
                     <h2>
-                        403</h2>
+                        401</h2>
                     <div class="error-details">
                         ¡No tienes permisos para realizar esta accion!
                     </div>
@@ -18,6 +18,9 @@
                         <a href="{{URL::to('/')}}" class="btn btn-primary"><span
                                     class="glyphicon glyphicon-home"></span>
                             Volver a inicio </a>
+                        <a href="{{URL::previous()}}" class="btn btn-primary"><span
+                                    class="glyphicon glyphicon-upload"></span>
+                            Volver atras </a>
                     </div>
                 </div>
             </div>
