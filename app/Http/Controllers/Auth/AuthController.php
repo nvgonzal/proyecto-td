@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use URL;
 
 class AuthController extends Controller
 {
@@ -66,6 +67,7 @@ class AuthController extends Controller
             'password'          => 'required|min:6|confirmed',
             'telefono' => 'required|min:6|max:30',
             'id_empresa' => 'required_unless:tipo,transportista',
+            'foto' => 'image|dimensions:max_width=750,max_height=750'
         ]);
     }
 
@@ -75,8 +77,9 @@ class AuthController extends Controller
      * @param  array  $data
      * @return Cuenta
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
+        //dd($data);
         $cuenta = new Cuenta();
         $cuenta->setAttribute('CUE_EMAIL', $data['email']);
         $cuenta->setAttribute('CUE_NOMBRES', $data['nombres']);
@@ -87,6 +90,15 @@ class AuthController extends Controller
         $cuenta->setAttribute('CUE_TIPO', $data['tipo']);
         $cuenta->setAttribute('CUE_PASSWORD', Hash::make($data['password']));
         $cuenta->setAttribute('CUE_TELEFONO', $data['telefono']);
+        if ($data->file('foto') != null) {
+            $foto = $data->file('foto');
+            $nombre = 'niru_' . md5(time()) . '.' . $foto->getClientOriginalExtension();
+            $ruta = public_path() . '\img\pp';
+            $foto->move($ruta, $nombre);
+            $cuenta->setAttribute('CUE_FOTO_PERFIL', $nombre);
+        } else {
+            $cuenta->setAttribute('CUE_FOTO_PERFIL', null);
+        }
         $cuenta->save();
         $tCuenta = $cuenta->getAttribute('CUE_TIPO');
         switch ($tCuenta) {
@@ -97,7 +109,7 @@ class AuthController extends Controller
                 $cliente->setAttribute('EMP_ID', $data['id_empresa']);
                 $cliente->save();
                 break;
-            case 'trasportista':
+            case 'transportista':
                 $trasnportista = new Transportista();
                 $trasnportista->setAttribute('CUE_ID', $cuenta->getAttribute('CUE_ID'));
                 $trasnportista->setAttribute('TRA_VALORACION', '0');
@@ -180,5 +192,20 @@ class AuthController extends Controller
             return redirect('/');
         }
 
+    }
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        Auth::guard($this->getGuard())->login($this->create($request));
+
+        return redirect($this->redirectPath());
     }
 }
