@@ -48,9 +48,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic"
-                                                                        src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
-                                                                        class="img-circle img-responsive"></div>
+                    <div class="col-md-3 col-lg-3 " align="center">
+                        <img alt="Foto de perfil"
+                             src="{{is_null($cuenta->CUE_FOTO_PERFIL) ?  URL::asset('img/pp/default.png') :
+                             URL::asset('img/pp/'.$cuenta->CUE_FOTO_PERFIL)}}"
+                             class="img-circle img-responsive">
+                    </div>
 
                     <div class="col-xs-10 col-sm-10 hidden-md hidden-lg"><br>
                         <dl>
