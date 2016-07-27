@@ -37,7 +37,9 @@
                                         <td>
                                             <a id="boton-finalizar" class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                title="Evaluar"
-                                               href="{{URL::to('cliente/envio/'.$envio->ENV_ID.'/rate')}}">
+                                               href="{{Request::path() == 'cliente/verhistorial/finalizados'
+                                               ? URL::to('cliente/envio/'.$envio->ENV_ID.'/rate'):
+                                               URL::to('transportista/envio/'.$envio->ENV_ID.'/rate')}}">
                                                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                             </a>
                                         </td>
@@ -48,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center"> {!! $envios->render() !!}</div>
+
         </div>
     </div>
 @stop

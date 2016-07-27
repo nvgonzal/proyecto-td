@@ -16,8 +16,8 @@
                             <div class="col-md-6">
                                 <div align="center">
                                     <img alt="Foto de perfil"
-                                         src="{{is_null($cuenta->CUE_FOTO_PERFIL) ?  URL::asset('img/pp/default.png') :
-                                                URL::asset('img/pp/'.$cuenta->CUE_FOTO_PERFIL)}}"
+                                         src="{{is_null($envio->cliente->cuenta->CUE_FOTO_PERFIL) ?  URL::asset('img/pp/default.png') :
+                                         URL::asset('img/pp/'.$envio->cliente->cuenta->CUE_FOTO_PERFIL)}}"
                                          class="img-circle img-responsive">
                                 </div>
                                 <dl class="text-center">
@@ -66,7 +66,7 @@
                                     </div>
                                     <h4>Evalua el trabajo del transportista</h4>
                                     {!! Form::open([
-                                    'route'=>['envio.rate.tra',$envio->ENV_ID],
+                                    'route'=>['envio.rate.cli',$envio->ENV_ID],
                                     'class'=>'form-inline',
                                     'method'=>'put'
                                     ])!!}
