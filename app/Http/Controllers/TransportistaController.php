@@ -107,7 +107,6 @@ class TransportistaController extends Controller
     {
         $envios = DB::select("select * from ENVIOS WHERE TRA_ID = ? AND ENV_ESTADO = 'Finalizado'",
             [Cuenta::find(Auth::user()->CUE_ID)->transportista->TRA_ID]);
-
         return view('envio.finalizados')->with('envios', $envios);
     }
 }

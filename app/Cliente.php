@@ -17,7 +17,7 @@ class Cliente extends Model
 
     public function empresa()
     {
-        return $this->belongsTo('App\Empresa', 'CLI_ID');
+        return $this->belongsTo('App\Empresa', 'EMP_ID');
     }
 
     public function envios()

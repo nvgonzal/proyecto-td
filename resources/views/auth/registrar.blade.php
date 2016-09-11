@@ -130,10 +130,10 @@
                                     {!! Form::radio('tipo','transportista',true) !!} Trasportista.
                                 </label>
                                 <label class="radio-inline">
-                                    {!! Form::radio('tipo','cliente',['id'=>'cliente']) !!} Cliente.
+                                    {!! Form::radio('tipo','cliente',false,['id'=>'cliente']) !!} Cliente.
                                 </label>
                                 <label class="radio-inline">
-                                    {!! Form::radio('tipo','ambos',['id'=>'ambos']) !!} Ambos.
+                                    {!! Form::radio('tipo','ambos',false,['id'=>'ambos']) !!} Ambos.
                                 </label>
                                 @if ($errors->has('tipo'))
                                     <span class="help-block col-md-offset-3">
